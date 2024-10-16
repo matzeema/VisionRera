@@ -78,14 +78,14 @@
 		E146E0AF2CB7E3C200F744AB /* VisionRera */ = {
 			isa = PBXGroup;
 			children = (
-				E146E0A72CB7E3C200F744AB /* Preview Content */,
+				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
 				E146E0A82CB7E3C200F744AB /* AppModel.swift */,
-				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
 				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
 				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
-				E146E0AC2CB7E3C200F744AB /* Info.plist */,
 				E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */,
-				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
+				E146E0AC2CB7E3C200F744AB /* Info.plist */,
+				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
+				E146E0A72CB7E3C200F744AB /* Preview Content */,
 			);
 			path = VisionRera;
 			sourceTree = "<group>";
