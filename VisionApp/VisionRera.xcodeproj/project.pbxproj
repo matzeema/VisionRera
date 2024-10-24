@@ -18,6 +18,7 @@
 		E19B1D8F2CCA9FEF001326CA /* RaceTrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */; };
 		E19B1D922CCAB04D001326CA /* RaceTrackSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D912CCAB046001326CA /* RaceTrackSlotData.swift */; };
 		E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */; };
+		E19B1D962CCAED1B001326CA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D952CCAED17001326CA /* LaunchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackManager.swift; sourceTree = "<group>"; };
 		E19B1D912CCAB046001326CA /* RaceTrackSlotData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackSlotData.swift; sourceTree = "<group>"; };
 		E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackCBUuids.swift; sourceTree = "<group>"; };
+		E19B1D952CCAED17001326CA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +86,10 @@
 		E146E0AF2CB7E3C200F744AB /* VisionRera */ = {
 			isa = PBXGroup;
 			children = (
-				E19B1D902CCAB038001326CA /* RaceTrack */,
 				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
 				E146E0A82CB7E3C200F744AB /* AppModel.swift */,
-				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
-				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
-				E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */,
+				E19B1D902CCAB038001326CA /* RaceTrack */,
+				E19B1D982CCAEEFE001326CA /* Views */,
 				E146E0AC2CB7E3C200F744AB /* Info.plist */,
 				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
 				E146E0A72CB7E3C200F744AB /* Preview Content */,
@@ -105,6 +105,17 @@
 				E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */,
 			);
 			path = RaceTrack;
+			sourceTree = "<group>";
+		};
+		E19B1D982CCAEEFE001326CA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
+				E19B1D952CCAED17001326CA /* LaunchView.swift */,
+				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
+				E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +199,7 @@
 				E19B1D922CCAB04D001326CA /* RaceTrackSlotData.swift in Sources */,
 				E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */,
 				E146E0B32CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift in Sources */,
+				E19B1D962CCAED1B001326CA /* LaunchView.swift in Sources */,
 				E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
