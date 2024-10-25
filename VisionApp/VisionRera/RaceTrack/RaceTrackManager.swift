@@ -10,6 +10,7 @@ import CoreBluetooth
 
 enum RaceTrackConnectionState {
     case notConnected
+    case scanning
     case tryConnect
     case failedConnect
     case connected
@@ -52,6 +53,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     
     /// Starts searching for the racetrack microcontroller with the required services. If there was detected a peripheral the `didDiscover`-delegate function is called.
     func scanForRaceTrack() {
+        connectionState = RaceTrackConnectionState.scanning
         cbCentralManager?.scanForPeripherals(withServices: [
             RaceTrackCBUuids.speedServiceUuid,
             RaceTrackCBUuids.finishlineSensorServiceUuid,
@@ -59,13 +61,9 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
         ])
     }
     
-    func stopScanPeripherals() {
-        cbCentralManager?.stopScan()
-    }
-    
     /// Called when the scan detected a new peripheral device.
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        stopScanPeripherals()
+        cbCentralManager?.stopScan()
         connectionState = RaceTrackConnectionState.tryConnect
         
         cbPeripheral = peripheral
