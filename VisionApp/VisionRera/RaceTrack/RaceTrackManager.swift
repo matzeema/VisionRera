@@ -74,7 +74,6 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     
     /// Called when connected to a peripheral. Starts discovering peripheral services.
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        stopScanPeripherals()
         connectionState = RaceTrackConnectionState.connected
         
         cbPeripheral?.delegate = self
@@ -92,7 +91,6 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         cbPeripheral = nil
         connectionState = RaceTrackConnectionState.failedConnect
-        scanForRaceTrack()
     }
     
     /// Called when disconnected from a peripheral.
@@ -102,8 +100,6 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
         raceTrackSlotDataA = nil
         raceTrackSlotDataB = nil
         cbPeripheral = nil
-        
-        scanForRaceTrack()
     }
     
     /// Called when a peripheral discoverd services. For each detected service all required characteristics will be discoverd.
