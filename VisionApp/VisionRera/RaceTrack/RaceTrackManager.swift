@@ -8,14 +8,7 @@
 import Foundation
 import CoreBluetooth
 
-enum RaceTrackConnectionState {
-    case notConnected
-    case scanning
-    case tryConnect
-    case failedConnect
-    case connected
-    case didDisconnect
-}
+
 
 /// Manages the BLE connection and data with the RaceTrack. Call `scanForRaceTrack` to look for nearby BLE devices with the
 /// required services. If there was found a device the Manager automatically connects to it and reads the data for each slot into the
@@ -26,9 +19,17 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     /// Gives information about the state of BLE on the device. Check `CBManagerState` for more details.
     private(set) var bleState = CBManagerState.unknown
     
+    enum ConnectionState {
+        case notConnected
+        case scanning
+        case tryConnect
+        case failedConnect
+        case connected
+        case didDisconnect
+    }
     /// Defines the connection state between the Apple Vision and a BLE device with the required services for a RaceTrack..
     /// For information about if Bluetooth is enabled, allowed, poweredOn, etc. use the `bleState` enum.
-    private(set) var connectionState = RaceTrackConnectionState.notConnected
+    private(set) var connectionState = ConnectionState.notConnected
     
     private var cbCentralManager: CBCentralManager?
     private var cbPeripheral: CBPeripheral?
@@ -53,7 +54,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     
     /// Starts searching for the racetrack microcontroller with the required services. If there was detected a peripheral the `didDiscover`-delegate function is called.
     func scanForRaceTrack() {
-        connectionState = RaceTrackConnectionState.scanning
+        connectionState = ConnectionState.scanning
         cbCentralManager?.scanForPeripherals(withServices: [
             RaceTrackCBUuids.speedServiceUuid,
             RaceTrackCBUuids.finishlineSensorServiceUuid,
@@ -64,7 +65,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     /// Called when the scan detected a new peripheral device.
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         cbCentralManager?.stopScan()
-        connectionState = RaceTrackConnectionState.tryConnect
+        connectionState = ConnectionState.tryConnect
         
         cbPeripheral = peripheral
         central.connect(peripheral)
@@ -72,7 +73,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     
     /// Called when connected to a peripheral. Starts discovering peripheral services.
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        connectionState = RaceTrackConnectionState.connected
+        connectionState = ConnectionState.connected
         
         cbPeripheral?.delegate = self
         cbPeripheral?.discoverServices([
@@ -88,12 +89,12 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     /// Called when failed connecting to a peripheral.
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         cbPeripheral = nil
-        connectionState = RaceTrackConnectionState.failedConnect
+        connectionState = ConnectionState.failedConnect
     }
     
     /// Called when disconnected from a peripheral.
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        connectionState = RaceTrackConnectionState.didDisconnect
+        connectionState = ConnectionState.didDisconnect
         
         raceTrackSlotDataA = nil
         raceTrackSlotDataB = nil
