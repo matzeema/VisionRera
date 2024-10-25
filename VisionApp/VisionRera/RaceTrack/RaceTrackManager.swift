@@ -13,6 +13,7 @@ enum RaceTrackConnectionState {
     case tryConnect
     case failedConnect
     case connected
+    case didDisconnect
 }
 
 /// Manages the BLE connection and data with the RaceTrack. Call `scanForRaceTrack` to look for nearby BLE devices with the
@@ -96,7 +97,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     
     /// Called when disconnected from a peripheral.
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        connectionState = RaceTrackConnectionState.notConnected
+        connectionState = RaceTrackConnectionState.didDisconnect
         
         raceTrackSlotDataA = nil
         raceTrackSlotDataB = nil
