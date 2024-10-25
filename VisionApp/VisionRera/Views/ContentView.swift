@@ -10,21 +10,27 @@ import RealityKit
 import RealityKitContent
 
 struct ContentView: View {
+    
+    @Environment(AppModel.self) private var appModel
+    @Environment(RaceTrackManager.self) private var raceTrackManager
+    
+    var showLaunchView: Bool {
+        return appModel.immersiveSpaceState == .open ||
+                raceTrackManager.bleState != .poweredOn ||
+                raceTrackManager.connectionState != .connected
+    }
 
     var body: some View {
-        VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
-
-            ToggleImmersiveSpaceButton()
+        if showLaunchView {
+            WelcomeView()
+        } else {
+            Text("You are ready to play.")
         }
-        .padding()
     }
 }
 
 #Preview(windowStyle: .automatic) {
     ContentView()
         .environment(AppModel())
+        .environment(RaceTrackManager())
 }
