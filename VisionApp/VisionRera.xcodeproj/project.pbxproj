@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E146E07E2CB6E69600F744AB /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = E146E07D2CB6E69600F744AB /* RealityKitContent */; };
 		E146E0B02CB7E3C200F744AB /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0A82CB7E3C200F744AB /* AppModel.swift */; };
 		E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AA2CB7E3C200F744AB /* ContentView.swift */; };
 		E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */; };
@@ -23,7 +22,6 @@
 
 /* Begin PBXFileReference section */
 		E146E0782CB6E69600F744AB /* VisionRera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionRera.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E146E07C2CB6E69600F744AB /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E146E0A82CB7E3C200F744AB /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		E146E0A92CB7E3C200F744AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +41,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E146E07E2CB6E69600F744AB /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				E146E0AF2CB7E3C200F744AB /* VisionRera */,
-				E146E07B2CB6E69600F744AB /* Packages */,
 				E146E0792CB6E69600F744AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,14 +61,6 @@
 				E146E0782CB6E69600F744AB /* VisionRera.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E146E07B2CB6E69600F744AB /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				E146E07C2CB6E69600F744AB /* RealityKitContent */,
-			);
-			path = Packages;
 			sourceTree = "<group>";
 		};
 		E146E0A72CB7E3C200F744AB /* Preview Content */ = {
@@ -135,7 +123,6 @@
 			);
 			name = VisionRera;
 			packageProductDependencies = (
-				E146E07D2CB6E69600F744AB /* RealityKitContent */,
 			);
 			productName = VisionRera;
 			productReference = E146E0782CB6E69600F744AB /* VisionRera.app */;
@@ -400,13 +387,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E146E07D2CB6E69600F744AB /* RealityKitContent */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RealityKitContent;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E146E0702CB6E69600F744AB /* Project object */;
 }
