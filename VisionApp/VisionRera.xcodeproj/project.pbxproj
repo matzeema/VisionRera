@@ -7,33 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E146E07E2CB6E69600F744AB /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = E146E07D2CB6E69600F744AB /* RealityKitContent */; };
 		E146E0B02CB7E3C200F744AB /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0A82CB7E3C200F744AB /* AppModel.swift */; };
 		E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AA2CB7E3C200F744AB /* ContentView.swift */; };
 		E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */; };
-		E146E0B32CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */; };
 		E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */; };
 		E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */; };
 		E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A92CB7E3C200F744AB /* Assets.xcassets */; };
 		E19B1D8F2CCA9FEF001326CA /* RaceTrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */; };
-		E19B1D922CCAB04D001326CA /* RaceTrackSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D912CCAB046001326CA /* RaceTrackSlotData.swift */; };
 		E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */; };
 		E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D952CCAED17001326CA /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E146E0782CB6E69600F744AB /* VisionRera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionRera.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E146E07C2CB6E69600F744AB /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E146E0A82CB7E3C200F744AB /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		E146E0A92CB7E3C200F744AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E146E0AA2CB7E3C200F744AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		E146E0AC2CB7E3C200F744AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleImmersiveSpaceButton.swift; sourceTree = "<group>"; };
 		E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionReraApp.swift; sourceTree = "<group>"; };
 		E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackManager.swift; sourceTree = "<group>"; };
-		E19B1D912CCAB046001326CA /* RaceTrackSlotData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackSlotData.swift; sourceTree = "<group>"; };
 		E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackCBUuids.swift; sourceTree = "<group>"; };
 		E19B1D952CCAED17001326CA /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,7 +37,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E146E07E2CB6E69600F744AB /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				E146E0AF2CB7E3C200F744AB /* VisionRera */,
-				E146E07B2CB6E69600F744AB /* Packages */,
 				E146E0792CB6E69600F744AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,14 +57,6 @@
 				E146E0782CB6E69600F744AB /* VisionRera.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E146E07B2CB6E69600F744AB /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				E146E07C2CB6E69600F744AB /* RealityKitContent */,
-			);
-			path = Packages;
 			sourceTree = "<group>";
 		};
 		E146E0A72CB7E3C200F744AB /* Preview Content */ = {
@@ -101,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */,
-				E19B1D912CCAB046001326CA /* RaceTrackSlotData.swift */,
 				E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */,
 			);
 			path = RaceTrack;
@@ -113,7 +96,6 @@
 				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
 				E19B1D952CCAED17001326CA /* WelcomeView.swift */,
 				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
-				E146E0AD2CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,7 +117,6 @@
 			);
 			name = VisionRera;
 			packageProductDependencies = (
-				E146E07D2CB6E69600F744AB /* RealityKitContent */,
 			);
 			productName = VisionRera;
 			productReference = E146E0782CB6E69600F744AB /* VisionRera.app */;
@@ -196,9 +177,7 @@
 				E146E0B02CB7E3C200F744AB /* AppModel.swift in Sources */,
 				E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */,
 				E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */,
-				E19B1D922CCAB04D001326CA /* RaceTrackSlotData.swift in Sources */,
 				E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */,
-				E146E0B32CB7E3C200F744AB /* ToggleImmersiveSpaceButton.swift in Sources */,
 				E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */,
 				E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */,
 			);
@@ -400,13 +379,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E146E07D2CB6E69600F744AB /* RealityKitContent */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RealityKitContent;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E146E0702CB6E69600F744AB /* Project object */;
 }

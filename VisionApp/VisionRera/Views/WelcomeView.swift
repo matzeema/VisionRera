@@ -30,7 +30,7 @@ struct WelcomeView: View {
                 RaceTrackConnectionView()
                 
             } else if appModel.immersiveSpaceState != .open {
-                // TODO: Implement Immersive Space Info
+                ImmersiveSpaceInfoView()
             }
         }
         .padding()
@@ -86,29 +86,37 @@ private struct RaceTrackConnectionView: View {
     var body: some View {
         switch raceTrackManager.connectionState {
         case .notConnected:
-            ScanForRaceTrackButtonView()
+            ScanForRaceTrackButtonView(title: "Scan for Racetrack")
+            
+        case .scanning:
+            SetupInfoView(
+                icon: Image(systemName: "car.front.waves.down")
+                    .symbolEffect(.variableColor),
+                title: "Scanning...",
+                description: "Searching for nearby RaceTracks."
+            )
 
         case .tryConnect:
             SetupInfoView(
                 icon: Image(systemName: "car.front.waves.down")
                     .symbolEffect(.variableColor),
-                title: "Connecting...",
-                description: "Lets go win those races!"
+                title: "RaceTrack found",
+                description: "Trying to connect..."
             )
             
         case .failedConnect:
             VStack {
-                ScanForRaceTrackButtonView()
+                ScanForRaceTrackButtonView(title: "Rescan for RaceTrack")
                 SetupInfoView(
                     icon: Image(systemName: "exclamationmark.circle"),
-                    title: "Failed connecting",
+                    title: "Failed",
                     description: "Something went wrong while connecting."
                 )
             }
             
         case .didDisconnect:
             VStack {
-                ScanForRaceTrackButtonView()
+                ScanForRaceTrackButtonView(title: "Rescan for RaceTrack")
                 SetupInfoView(
                     icon: Image(systemName: "exclamationmark.circle"),
                     title: "Disconnected",
@@ -125,6 +133,7 @@ private struct RaceTrackConnectionView: View {
 /// Button to let the user scan for a nearby RaceTrack.
 private struct ScanForRaceTrackButtonView: View {
     @Environment(RaceTrackManager.self) var raceTrackManager
+    let title: String
     
     var body: some View {
         Button(
@@ -133,7 +142,7 @@ private struct ScanForRaceTrackButtonView: View {
                 HStack {
                     Image(systemName: "car.front.waves.down")
                         .symbolEffect(.wiggle.byLayer, options: .repeat(.periodic(delay: 10.0)))
-                    Text("Scan for RaceTrack")
+                    Text(title)
                 }
             }
         )
@@ -141,20 +150,68 @@ private struct ScanForRaceTrackButtonView: View {
     }
 }
 
+private struct ImmersiveSpaceInfoView: View {
+    @Environment(AppModel.self) private var appModel
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    
+    var body: some View {
+        VStack {
+            Button(
+                action: {
+                    Task { @MainActor in
+                        appModel.immersiveSpaceState = .inTransition
+                        switch await openImmersiveSpace(id: appModel.immersiveSpaceID) {
+                        case .opened:
+                            // Don't set immersiveSpaceState to .open because there
+                            // may be multiple paths to ImmersiveView.onAppear().
+                            // Only set .open in ImmersiveView.onAppear().
+                            break
+                            
+                        case .userCancelled, .error:
+                            // On error, we need to mark the immersive space
+                            // as closed because it failed to open.
+                            fallthrough
+                        @unknown default:
+                            // On unknown response, assume space did not open.
+                            appModel.immersiveSpaceState = .closed
+                        }
+                        
+                    }
+                },
+                label: {
+                    HStack {
+                        Image(systemName: "car.rear.road.lane")
+                            .symbolEffect(.breathe, options: .repeat(.periodic(delay: 10.0)))
+                        Text("Launch the Experience")
+                    }
+                }
+            )
+            .disabled(appModel.immersiveSpaceState == .inTransition)
+            
+            HStack {
+                Image(systemName: "checkmark.circle")
+                    .foregroundStyle(.green)
+                    .imageScale(.small)
+                Text("RaceTrack connected")
+                    .font(.callout)
+            }
+            .padding(.top, 4.0)
+        }
+    }
+}
+
 /// Generic view to inform the user about issues with BLE and the RaceTrack.
 private struct SetupInfoView<Icon: View>: View {
-    var icon: Icon? = nil
+    var icon: Icon
     let title: String
     let description: String
     
     var body: some View {
         GroupBox {
             VStack {
-                if let icon {
-                    icon
-                        .padding(.trailing, 8.0)
-                        .imageScale(.large)
-                }
+                icon
+                    .padding(.trailing, 8.0)
+                    .imageScale(.large)
                 
                 VStack {
                     Text(title)
