@@ -22,7 +22,7 @@ enum CarOnTrackState: UInt8 {
 }
 
 /// Manages the BLE connection and data with the RaceTrack. Call `scanForRaceTrack` to look for nearby BLE devices with the
-/// required services. If there was found a device the Manager automatically connects to it and reads the data for each slot into the
+/// required services. If there was found a device the Apple Vision automatically connects to it and reads the data for each slot into the
 /// `RaceTrackSlotData` object.
 @Observable
 class RaceTrackModel : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
