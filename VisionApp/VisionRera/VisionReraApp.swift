@@ -12,12 +12,18 @@ struct VisionReraApp: App {
 
     @State private var immersiveModel = ImmersiveModel()
     @State private var raceTrackModel = RaceTrackModel()
+    @State private var inputModel = InputModel()
+    @State private var trackDetectionModel = TrackDetectionModel()
+    @State private var gameModel = GameModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(immersiveModel)
                 .environment(raceTrackModel)
+                .environment(inputModel)
+                .environment(trackDetectionModel)
+                .environment(gameModel)
         }
         .defaultSize(width: 600, height: 400)
 
@@ -25,6 +31,9 @@ struct VisionReraApp: App {
             ImmersiveView()
                 .environment(immersiveModel)
                 .environment(raceTrackModel)
+                .environment(inputModel)
+                .environment(trackDetectionModel)
+                .environment(gameModel)
                 .onAppear {
                     immersiveModel.immersiveSpaceState = .open
                 }

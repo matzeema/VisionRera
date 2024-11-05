@@ -12,10 +12,10 @@ import ARKit
 struct ImmersiveView: View {
     @Environment(ImmersiveModel.self) var immersiveModel
     @Environment(RaceTrackModel.self) var raceTrackModel
-    
-    @State var inputModel = InputModel()
-    @State var trackDetectionModel = TrackDetectionModel()
-    @State var gameModel = GameModel()
+    @Environment(InputModel.self) var inputModel
+    @Environment(TrackDetectionModel.self) var trackDetectionModel
+    @Environment(GameModel.self) var gameModel
+
 
     var body: some View {
         RealityView { content in
