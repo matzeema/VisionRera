@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ARKit
 
 /// Maintains state related to immersive spcaes and AR.
 @MainActor
@@ -18,4 +19,7 @@ class ImmersiveModel {
         case open
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
+    
+    /// The ARKitSession of the app.
+    let arKitSession = ARKitSession()
 }
