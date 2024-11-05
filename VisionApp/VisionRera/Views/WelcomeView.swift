@@ -10,7 +10,7 @@ import CoreBluetooth
 
 /// Welcomes the user with the app title and informs about the connection with the RaceTrack and the ImmersiveSpace.
 struct WelcomeView: View {
-    @Environment(AppModel.self) private var appModel
+    @Environment(ImmersiveModel.self) private var immersiveModel
     @Environment(RaceTrackManager.self) private var raceTrackManager
     
     var body: some View {
@@ -29,7 +29,7 @@ struct WelcomeView: View {
             } else if raceTrackManager.connectionState != .connected {
                 RaceTrackConnectionView()
                 
-            } else if appModel.immersiveSpaceState != .open {
+            } else if immersiveModel.immersiveSpaceState != .open {
                 ImmersiveSpaceInfoView()
             }
         }
@@ -151,7 +151,7 @@ private struct ScanForRaceTrackButtonView: View {
 }
 
 private struct ImmersiveSpaceInfoView: View {
-    @Environment(AppModel.self) private var appModel
+    @Environment(ImmersiveModel.self) private var immersiveModel
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     var body: some View {
@@ -159,8 +159,8 @@ private struct ImmersiveSpaceInfoView: View {
             Button(
                 action: {
                     Task { @MainActor in
-                        appModel.immersiveSpaceState = .inTransition
-                        switch await openImmersiveSpace(id: appModel.immersiveSpaceID) {
+                        immersiveModel.immersiveSpaceState = .inTransition
+                        switch await openImmersiveSpace(id: immersiveModel.immersiveSpaceID) {
                         case .opened:
                             // Don't set immersiveSpaceState to .open because there
                             // may be multiple paths to ImmersiveView.onAppear().
@@ -173,7 +173,7 @@ private struct ImmersiveSpaceInfoView: View {
                             fallthrough
                         @unknown default:
                             // On unknown response, assume space did not open.
-                            appModel.immersiveSpaceState = .closed
+                            immersiveModel.immersiveSpaceState = .closed
                         }
                         
                     }
@@ -186,7 +186,7 @@ private struct ImmersiveSpaceInfoView: View {
                     }
                 }
             )
-            .disabled(appModel.immersiveSpaceState == .inTransition)
+            .disabled(immersiveModel.immersiveSpaceState == .inTransition)
             
             HStack {
                 Image(systemName: "checkmark.circle")
@@ -229,6 +229,6 @@ private struct SetupInfoView<Icon: View>: View {
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     WelcomeView()
-        .environment(AppModel())
+        .environment(ImmersiveModel())
         .environment(RaceTrackManager())
 }
