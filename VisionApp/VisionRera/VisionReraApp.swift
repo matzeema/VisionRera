@@ -11,20 +11,20 @@ import SwiftUI
 struct VisionReraApp: App {
 
     @State private var immersiveModel = ImmersiveModel()
-    @State private var raceTrackManager = RaceTrackManager()
+    @State private var raceTrackModel = RaceTrackModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(immersiveModel)
-                .environment(raceTrackManager)
+                .environment(raceTrackModel)
         }
         .defaultSize(width: 600, height: 400)
 
         ImmersiveSpace(id: immersiveModel.immersiveSpaceID) {
             ImmersiveView()
                 .environment(immersiveModel)
-                .environment(raceTrackManager)
+                .environment(raceTrackModel)
                 .onAppear {
                     immersiveModel.immersiveSpaceState = .open
                 }

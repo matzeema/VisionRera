@@ -1,5 +1,5 @@
 //
-//  RacetrackManager.swift
+//  RaceTrackModel.swift
 //  VisionRera
 //
 //  Created by Mattias Emanuel on 24.10.24.
@@ -25,7 +25,7 @@ enum CarOnTrackState: UInt8 {
 /// required services. If there was found a device the Manager automatically connects to it and reads the data for each slot into the
 /// `RaceTrackSlotData` object.
 @Observable
-class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+class RaceTrackModel : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     /// Gives information about the state of BLE on the device. Check `CBManagerState` for more details.
     private(set) var bleState = CBManagerState.unknown
@@ -247,7 +247,7 @@ class RaceTrackManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegat
     }
 }
 
-extension RaceTrackManager {
+extension RaceTrackModel {
     
     /// Helps converting `Data` objects to `UInt32` values.
     private func convertDataToUInt32(data: Data) -> UInt32? {

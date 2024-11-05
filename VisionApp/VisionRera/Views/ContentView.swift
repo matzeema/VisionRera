@@ -11,12 +11,12 @@ import RealityKit
 struct ContentView: View {
     
     @Environment(ImmersiveModel.self) private var immersiveModel
-    @Environment(RaceTrackManager.self) private var raceTrackManager
+    @Environment(RaceTrackModel.self) private var raceTrackModel
     
     var showLaunchView: Bool {
         return immersiveModel.immersiveSpaceState == .open ||
-                raceTrackManager.bleState != .poweredOn ||
-                raceTrackManager.connectionState != .connected
+                raceTrackModel.bleState != .poweredOn ||
+                raceTrackModel.connectionState != .connected
     }
 
     var body: some View {
@@ -31,5 +31,5 @@ struct ContentView: View {
 #Preview(windowStyle: .automatic) {
     ContentView()
         .environment(ImmersiveModel())
-        .environment(RaceTrackManager())
+        .environment(RaceTrackModel())
 }

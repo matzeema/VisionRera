@@ -13,7 +13,7 @@
 		E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */; };
 		E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */; };
 		E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A92CB7E3C200F744AB /* Assets.xcassets */; };
-		E19B1D8F2CCA9FEF001326CA /* RaceTrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */; };
+		E19B1D8F2CCA9FEF001326CA /* RaceTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D8E2CCA9FEB001326CA /* RaceTrackModel.swift */; };
 		E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */; };
 		E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D952CCAED17001326CA /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +27,7 @@
 		E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveView.swift; sourceTree = "<group>"; };
 		E146E0AC2CB7E3C200F744AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionReraApp.swift; sourceTree = "<group>"; };
-		E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackManager.swift; sourceTree = "<group>"; };
+		E19B1D8E2CCA9FEB001326CA /* RaceTrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackModel.swift; sourceTree = "<group>"; };
 		E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackCBUuids.swift; sourceTree = "<group>"; };
 		E19B1D952CCAED17001326CA /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,7 +84,7 @@
 		E19B1D902CCAB038001326CA /* RaceTrack */ = {
 			isa = PBXGroup;
 			children = (
-				E19B1D8E2CCA9FEB001326CA /* RaceTrackManager.swift */,
+				E19B1D8E2CCA9FEB001326CA /* RaceTrackModel.swift */,
 				E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */,
 			);
 			path = RaceTrack;
@@ -173,7 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E19B1D8F2CCA9FEF001326CA /* RaceTrackManager.swift in Sources */,
+				E19B1D8F2CCA9FEF001326CA /* RaceTrackModel.swift in Sources */,
 				E146E0B02CB7E3C200F744AB /* ImmersiveModel.swift in Sources */,
 				E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */,
 				E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */,
