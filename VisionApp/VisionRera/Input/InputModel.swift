@@ -16,7 +16,7 @@ protocol InputProtocol {
 
 /// The protocol hand gesture input methods need to conforn to. Uses ARKit for Handtracking.
 protocol HandtrackingInputProtocol: InputProtocol {
-    func update(from handAnchor: HandAnchor)
+    func update(from handAnchor: AnchorUpdate<HandAnchor>)
 }
 
 enum InputSpeedCurve {
@@ -30,25 +30,37 @@ enum InputSpeedCurve {
 @MainActor
 @Observable
 class InputModel {
+    private let handGestureInput = HandGestureInput()
+    private let gamepadInput = GamepadInput()
+    
     enum Method {
-        case handGesture(HandtrackingInputProtocol)
-        case gamepad(InputProtocol)
-        
-        var inputHandler: InputProtocol {
-            switch self {
-            case .handGesture(let handtrackingInputProtocol):
-                return handtrackingInputProtocol
-            case .gamepad(let inputProtocol):
-                return inputProtocol
-            }
+        case handGesture
+        case gamepad
+    }
+    var method: Method = .handGesture
+    
+    var inputHandler: InputProtocol {
+        switch method {
+        case .handGesture: return handGestureInput
+        case .gamepad:     return gamepadInput
         }
     }
-    var method: Method = .handGesture(HandGestureInput())
+    
+    var handtrackingInputHandler: HandtrackingInputProtocol? {
+        switch method {
+        case .handGesture: return handGestureInput
+        default: return nil
+        }
+    }
+    
+    var inputRequiresHandtrackingData: Bool {
+        return handtrackingInputHandler != nil
+    }
     
     /// The speed the user currently inputs. Allowed range is between 0.0 and 1.0. This value can differ
     /// from the actual speed send to the RaceTrack, depending on the current state of the game.
     var speed: Float {
-        let inputSpeed: Float = method.inputHandler.speed
+        let inputSpeed: Float = inputHandler.speed
         let speedWithApplyCurve = speedCurve.apply(to: inputSpeed)
         return speedWithApplyCurve
     }
@@ -56,7 +68,7 @@ class InputModel {
     /// The speed curve the user selected. This curve will be applied on the input speed and allows
     /// for example to give more control in the upper or lower speed ranges.
     var speedCurve: InputSpeedCurve {
-        return method.inputHandler.speedCurve
+        return inputHandler.speedCurve
     }
 }
 

@@ -11,8 +11,8 @@ struct HandGestureInput: HandtrackingInputProtocol {
     var speed: Float = 0
     var speedCurve: InputSpeedCurve = .linear
     
-    func update(from handAnchor: HandAnchor) {
-        <#code#>
+    func update(from handAnchor: AnchorUpdate<HandAnchor>) {
+        print(handAnchor)
     }
     
     // TODO: Implement HandGesture support
