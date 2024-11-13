@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(RaceTrackModel.self) private var raceTrackModel
     
     var showLaunchView: Bool {
-        return immersiveModel.immersiveSpaceState == .open ||
+        return immersiveModel.immersiveSpaceState != .open ||
                 raceTrackModel.bleState != .poweredOn ||
                 raceTrackModel.connectionState != .connected
     }

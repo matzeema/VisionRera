@@ -20,6 +20,20 @@ struct ImmersiveView: View {
     var body: some View {
         RealityView { content in
             
+        } update: { content in
+            
+        }
+        // Send handtracking data to InputModel if a handtracking input method is selected.
+        .onChange(of: inputModel.inputRequiresHandtrackingData, initial: true) {
+            immersiveModel.enableHandTracking = inputModel.inputRequiresHandtrackingData
+            
+            if immersiveModel.enableHandTracking {
+                Task {
+                    for await update in immersiveModel.handTracking.anchorUpdates {
+                        inputModel.handtrackingInputHandler?.update(from: update)
+                    }
+                }
+            }
         }
     }
 }

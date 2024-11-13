@@ -6,8 +6,8 @@
 //
 
 struct GamepadInput: InputProtocol {
-    var speed: Float
-    var speedCurve: InputSpeedCurve
+    var speed: Float = 0
+    var speedCurve: InputSpeedCurve = .linear
     
     // TODO: Implement Gamepad support
 }
