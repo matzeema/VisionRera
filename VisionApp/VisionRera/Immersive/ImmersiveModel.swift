@@ -21,16 +21,9 @@ class ImmersiveModel {
     var immersiveSpaceState = ImmersiveSpaceState.closed {
         didSet {
             switch immersiveSpaceState {
-            case .closed:
-                arKitSession.stop()
-                
-            case .open:
-                Task {
-                    await runARKitSession()
-                }
-                
-            default:
-                break
+            case .closed: arKitSession.stop()
+            case .open:   Task { await runARKitSession() }
+            default: break
             }
         }
     }
