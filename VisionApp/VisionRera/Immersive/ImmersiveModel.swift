@@ -22,9 +22,8 @@ class ImmersiveModel {
         didSet {
             switch immersiveSpaceState {
             case .closed:
-                Task {
-                    await arKitSession.stop()
-                }
+                arKitSession.stop()
+                
             case .open:
                 Task {
                     await runARKitSession()
