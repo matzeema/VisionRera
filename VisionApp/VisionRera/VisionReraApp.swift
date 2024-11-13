@@ -10,26 +10,35 @@ import SwiftUI
 @main
 struct VisionReraApp: App {
 
-    @State private var appModel = AppModel()
-    @State private var raceTrackManager = RaceTrackManager()
+    @State private var immersiveModel = ImmersiveModel()
+    @State private var raceTrackModel = RaceTrackModel()
+    @State private var inputModel = InputModel()
+    @State private var trackDetectionModel = TrackDetectionModel()
+    @State private var gameModel = GameModel()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(appModel)
-                .environment(raceTrackManager)
+                .environment(immersiveModel)
+                .environment(raceTrackModel)
+                .environment(inputModel)
+                .environment(trackDetectionModel)
+                .environment(gameModel)
         }
         .defaultSize(width: 600, height: 400)
 
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
+        ImmersiveSpace(id: immersiveModel.immersiveSpaceID) {
             ImmersiveView()
-                .environment(appModel)
-                .environment(raceTrackManager)
+                .environment(immersiveModel)
+                .environment(raceTrackModel)
+                .environment(inputModel)
+                .environment(trackDetectionModel)
+                .environment(gameModel)
                 .onAppear {
-                    appModel.immersiveSpaceState = .open
+                    immersiveModel.immersiveSpaceState = .open
                 }
                 .onDisappear {
-                    appModel.immersiveSpaceState = .closed
+                    immersiveModel.immersiveSpaceState = .closed
                 }
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)

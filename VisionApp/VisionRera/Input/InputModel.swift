@@ -1,0 +1,85 @@
+//
+//  InputModel.swift
+//  VisionRera
+//
+//  Created by Mattias Emanuel on 05.11.24.
+//
+
+import SwiftUI
+import ARKit
+
+/// The protocol all input methods need to conform to.
+protocol InputProtocol {
+    var speed: Float { get set }
+    var speedCurve: InputSpeedCurve { get set }
+}
+
+/// The protocol hand gesture input methods need to conforn to. Uses ARKit for Handtracking.
+protocol HandtrackingInputProtocol: InputProtocol {
+    func update(from handAnchor: HandAnchor)
+}
+
+enum InputSpeedCurve {
+    case linear
+    case quadEaseOut
+    case quintEaseOut
+    case circEaseOut
+}
+
+/// Manages the state of the current input method.
+@MainActor
+@Observable
+class InputModel {
+    enum Method {
+        case handGesture(HandtrackingInputProtocol)
+        case gamepad(InputProtocol)
+        
+        var inputHandler: InputProtocol {
+            switch self {
+            case .handGesture(let handtrackingInputProtocol):
+                return handtrackingInputProtocol
+            case .gamepad(let inputProtocol):
+                return inputProtocol
+            }
+        }
+    }
+    var method: Method = .handGesture(HandGestureInput())
+    
+    /// The speed the user currently inputs. Allowed range is between 0.0 and 1.0. This value can differ
+    /// from the actual speed send to the RaceTrack, depending on the current state of the game.
+    var speed: Float {
+        let inputSpeed: Float = method.inputHandler.speed
+        let speedWithApplyCurve = speedCurve.apply(to: inputSpeed)
+        return speedWithApplyCurve
+    }
+    
+    /// The speed curve the user selected. This curve will be applied on the input speed and allows
+    /// for example to give more control in the upper or lower speed ranges.
+    var speedCurve: InputSpeedCurve {
+        return method.inputHandler.speedCurve
+    }
+}
+
+/// Math implementations of the speed curves.
+private extension InputSpeedCurve {
+    func apply(to value: Float) -> Float {
+        switch self {
+        case .linear:       return value
+        case .quadEaseOut:  return quadEaseOut(value)
+        case .quintEaseOut: return quintEaseOut(value)
+        case .circEaseOut:  return circEaseOut(value)
+        }
+    }
+    
+    private func quadEaseOut(_ p: Float) -> Float {
+        return -(p * (p - 2));
+    }
+
+    private func quintEaseOut(_ p: Float) -> Float {
+        return (1 - pow(1 - p, 5));
+    }
+
+    private func circEaseOut(_ p: Float) -> Float {
+        return sqrt(1 - pow(p - 1, 2));
+    }
+}

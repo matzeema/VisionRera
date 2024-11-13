@@ -10,8 +10,8 @@ import CoreBluetooth
 
 /// Welcomes the user with the app title and informs about the connection with the RaceTrack and the ImmersiveSpace.
 struct WelcomeView: View {
-    @Environment(AppModel.self) private var appModel
-    @Environment(RaceTrackManager.self) private var raceTrackManager
+    @Environment(ImmersiveModel.self) private var immersiveModel
+    @Environment(RaceTrackModel.self) private var raceTrackModel
     
     var body: some View {
         VStack {
@@ -23,13 +23,13 @@ struct WelcomeView: View {
                     .foregroundStyle(.secondary)
             }.padding()
             
-            if raceTrackManager.bleState != .poweredOn {
+            if raceTrackModel.bleState != .poweredOn {
                 BLEInfoView()
                 
-            } else if raceTrackManager.connectionState != .connected {
+            } else if raceTrackModel.connectionState != .connected {
                 RaceTrackConnectionView()
                 
-            } else if appModel.immersiveSpaceState != .open {
+            } else if immersiveModel.immersiveSpaceState != .open {
                 ImmersiveSpaceInfoView()
             }
         }
@@ -39,10 +39,10 @@ struct WelcomeView: View {
 
 /// Informs the user about issues with the BLE connection. Is empty if there are no issues.
 private struct BLEInfoView: View {
-    @Environment(RaceTrackManager.self) var raceTrackManager
+    @Environment(RaceTrackModel.self) var raceTrackModel
     
     var body: some View {
-        switch raceTrackManager.bleState {
+        switch raceTrackModel.bleState {
         case .unauthorized:
             SetupInfoView(
                 icon: Image(systemName: "hand.raised")
@@ -81,10 +81,10 @@ private struct BLEInfoView: View {
 
 /// Informs the user about the connection state with the RaceTrack. Is empty if the connection was successful.
 private struct RaceTrackConnectionView: View {
-    @Environment(RaceTrackManager.self) var raceTrackManager
+    @Environment(RaceTrackModel.self) var raceTrackModel
     
     var body: some View {
-        switch raceTrackManager.connectionState {
+        switch raceTrackModel.connectionState {
         case .notConnected:
             ScanForRaceTrackButtonView(title: "Scan for Racetrack")
             
@@ -132,12 +132,12 @@ private struct RaceTrackConnectionView: View {
 
 /// Button to let the user scan for a nearby RaceTrack.
 private struct ScanForRaceTrackButtonView: View {
-    @Environment(RaceTrackManager.self) var raceTrackManager
+    @Environment(RaceTrackModel.self) var raceTrackModel
     let title: String
     
     var body: some View {
         Button(
-            action: { raceTrackManager.scanForRaceTrack() },
+            action: { raceTrackModel.scanForRaceTrack() },
             label: {
                 HStack {
                     Image(systemName: "car.front.waves.down")
@@ -151,7 +151,7 @@ private struct ScanForRaceTrackButtonView: View {
 }
 
 private struct ImmersiveSpaceInfoView: View {
-    @Environment(AppModel.self) private var appModel
+    @Environment(ImmersiveModel.self) private var immersiveModel
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     
     var body: some View {
@@ -159,8 +159,8 @@ private struct ImmersiveSpaceInfoView: View {
             Button(
                 action: {
                     Task { @MainActor in
-                        appModel.immersiveSpaceState = .inTransition
-                        switch await openImmersiveSpace(id: appModel.immersiveSpaceID) {
+                        immersiveModel.immersiveSpaceState = .inTransition
+                        switch await openImmersiveSpace(id: immersiveModel.immersiveSpaceID) {
                         case .opened:
                             // Don't set immersiveSpaceState to .open because there
                             // may be multiple paths to ImmersiveView.onAppear().
@@ -173,7 +173,7 @@ private struct ImmersiveSpaceInfoView: View {
                             fallthrough
                         @unknown default:
                             // On unknown response, assume space did not open.
-                            appModel.immersiveSpaceState = .closed
+                            immersiveModel.immersiveSpaceState = .closed
                         }
                         
                     }
@@ -186,7 +186,7 @@ private struct ImmersiveSpaceInfoView: View {
                     }
                 }
             )
-            .disabled(appModel.immersiveSpaceState == .inTransition)
+            .disabled(immersiveModel.immersiveSpaceState == .inTransition)
             
             HStack {
                 Image(systemName: "checkmark.circle")
@@ -229,6 +229,6 @@ private struct SetupInfoView<Icon: View>: View {
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     WelcomeView()
-        .environment(AppModel())
-        .environment(RaceTrackManager())
+        .environment(ImmersiveModel())
+        .environment(RaceTrackModel())
 }

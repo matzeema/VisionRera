@@ -1,16 +1,17 @@
 //
-//  AppModel.swift
+//  ImmersiveModel.swift
 //  VisionRera
 //
 //  Created by Mattias Emanuel on 09.10.24.
 //
 
 import SwiftUI
+import ARKit
 
-/// Maintains app-wide state
+/// Maintains state related to immersive spcaes and AR.
 @MainActor
 @Observable
-class AppModel {
+class ImmersiveModel {
     let immersiveSpaceID = "ImmersiveSpace"
     enum ImmersiveSpaceState {
         case closed
@@ -18,4 +19,7 @@ class AppModel {
         case open
     }
     var immersiveSpaceState = ImmersiveSpaceState.closed
+    
+    /// The ARKitSession of the app.
+    let arKitSession = ARKitSession()
 }
