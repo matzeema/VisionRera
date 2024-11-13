@@ -19,6 +19,8 @@
 		E1CD1DCB2CDAB9A30052BDBE /* InputModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */; };
 		E1CD1DCE2CDABA8A0052BDBE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DCD2CDABA840052BDBE /* GameModel.swift */; };
 		E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */; };
+		E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */; };
+		E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModel.swift; sourceTree = "<group>"; };
 		E1CD1DCD2CDABA840052BDBE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetectionModel.swift; sourceTree = "<group>"; };
+		E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureInput.swift; sourceTree = "<group>"; };
+		E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamepadInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */,
+				E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */,
+				E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -214,6 +220,8 @@
 				E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */,
 				E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */,
 				E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */,
+				E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */,
+				E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */,
 				E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */,
 				E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */,
 			);
