@@ -8,6 +8,7 @@
 import ARKit
 import RealityKit
 
+@Observable
 class HandGestureInput: HandtrackingInputProtocol {
     var speed: Float = 0
     var speedCurve: InputSpeedCurve = .linear
