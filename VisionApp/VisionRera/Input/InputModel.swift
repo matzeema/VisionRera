@@ -46,15 +46,18 @@ class InputModel {
         }
     }
     
-    var handtrackingInputHandler: HandtrackingInputProtocol? {
+    var inputRequiresHandtrackingData: Bool {
         switch method {
-        case .handGesture: return handGestureInput
-        default: return nil
+        case .handGesture: return true
+        default: return false
         }
     }
     
-    var inputRequiresHandtrackingData: Bool {
-        return handtrackingInputHandler != nil
+    func updateHandTrackingInputMethod(handAnchor: AnchorUpdate<HandAnchor>) {
+        switch method {
+        case .handGesture: handGestureInput.update(from: handAnchor)
+        default: break
+        }
     }
     
     /// The speed the user currently inputs. Allowed range is between 0.0 and 1.0. This value can differ

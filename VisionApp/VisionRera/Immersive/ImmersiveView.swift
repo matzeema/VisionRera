@@ -30,7 +30,7 @@ struct ImmersiveView: View {
             if immersiveModel.enableHandTracking {
                 Task {
                     for await update in immersiveModel.handTracking.anchorUpdates {
-                        inputModel.handtrackingInputHandler?.update(from: update)
+                        inputModel.updateHandTrackingInputMethod(handAnchor: update)
                     }
                 }
             }
