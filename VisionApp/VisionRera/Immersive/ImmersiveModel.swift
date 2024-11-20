@@ -45,6 +45,10 @@ class ImmersiveModel {
         var dataProviders: [any DataProvider] = []
         
         if HandTrackingProvider.isSupported && enableHandTracking {
+            // It is not possible to re-run a stopped data provider.
+            // -> Create a new HandTrackingProvider instance
+            handTracking = HandTrackingProvider()
+            
             dataProviders.append(handTracking)
         }
         
@@ -57,10 +61,6 @@ class ImmersiveModel {
     
     private func stopARKitSession() {
         arKitSession.stop()
-        
-        // It is not possible to re-run a stopped data provider.
-        // -> Create a new HandTrackingProvider instance
-        handTracking = HandTrackingProvider()
     }
     
 }
