@@ -19,11 +19,18 @@ protocol HandtrackingInputProtocol: InputProtocol {
     func update(from handAnchor: AnchorUpdate<HandAnchor>)
 }
 
-enum InputSpeedCurve {
+enum InputSpeedCurve: CaseIterable {
     case linear
     case quadEaseOut
     case quintEaseOut
     case circEaseOut
+    
+    func next() -> InputSpeedCurve {
+          let allCases = Self.allCases
+          guard let currentIndex = Self.allCases.firstIndex(of: self) else { return self }
+          let nextIndex = (currentIndex + 1) % allCases.count
+          return allCases[nextIndex]
+      }
 }
 
 /// Manages the state of the current input method.
