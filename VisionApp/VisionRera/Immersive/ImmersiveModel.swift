@@ -21,7 +21,7 @@ class ImmersiveModel {
     var immersiveSpaceState = ImmersiveSpaceState.closed {
         didSet {
             switch immersiveSpaceState {
-            case .closed: arKitSession.stop()
+            case .closed: stopARKitSession()
             case .open:   Task { await runARKitSession() }
             default: break
             }
@@ -30,7 +30,7 @@ class ImmersiveModel {
     
     /// The ARKitSession of the app.
     let arKitSession = ARKitSession()
-    let handTracking = HandTrackingProvider()
+    var handTracking = HandTrackingProvider()
     
     var enableHandTracking = false {
         didSet {
@@ -53,6 +53,14 @@ class ImmersiveModel {
         } catch {
             print("ARKitSession failed to run: \(error)")
         }
+    }
+    
+    private func stopARKitSession() {
+        arKitSession.stop()
+        
+        // It is not possible to re-run a stopped data provider.
+        // -> Create a new HandTrackingProvider instance
+        handTracking = HandTrackingProvider()
     }
     
 }
