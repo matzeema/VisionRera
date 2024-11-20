@@ -5,7 +5,7 @@
 //  Created by Mattias Emanuel on 05.11.24.
 //
 
-struct GamepadInput: InputProtocol {
+class GamepadInput: InputProtocol {
     var speed: Float = 0
     var speedCurve: InputSpeedCurve = .linear
     
