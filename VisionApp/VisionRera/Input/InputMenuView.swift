@@ -144,8 +144,53 @@ private struct HandGestureOptionsView: View {
 }
 
 private struct GamepadOptionsView: View {
+    @Environment(InputModel.self) private var inputModel
+    
     var body: some View {
-        Text("Gamepad")
+        @Bindable var gamepadInput: GamepadInput = inputModel.gamepadInput
+        
+        VStack {
+            
+            // Inform about possible issues
+            if !gamepadInput.isAvailable {
+                switch gamepadInput.state {
+                case .noGamepadConnected:
+                    IssueWithInputMethodView(
+                        systemImageName: "gamecontroller",
+                        title: "No Gamecontroller connected",
+                        description: "Go to Bluetooth settings and connect a Gamecontroller."
+                    )
+                    
+                default: EmptyView()
+                }
+            }
+            
+            // Explain the controls
+            GroupBox {
+                VStack(alignment: .leading) {
+                    Text("Controls")
+                        .font(.headline)
+                        .padding(.bottom, 4.0)
+                    
+                    VStack(alignment: .leading, spacing: 4.0) {
+                        HStack {
+                            Image(systemName: "rt.button.roundedtop.horizontal.fill")
+                            Text("Speed (\(inputModel.speedFormated))")
+                        }
+                        HStack {
+                            Image(systemName: "x.circle").padding(.horizontal, 2.0)
+                            Text("Speed curve (\(gamepadInput.speedCurve.description))")
+                        }
+                        
+                        Text("Try to press X and see the changes in the speed with different speed curves.")
+                            .font(.caption)
+                            .padding(.top, 4.0)
+                    }
+                    .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
     }
 }
 

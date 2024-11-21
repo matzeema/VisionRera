@@ -72,6 +72,13 @@ class InputModel {
     }
 }
 
+/// Get input values in a easy to display format.
+extension InputModel {
+    var speedFormated: String {
+        return "\(String(format: "%.0f", inputHandler.speed * 100))%"
+    }
+}
+
 /// Math implementations of the speed curves.
 private extension InputSpeedCurve {
     func apply(to value: Float) -> Float {
@@ -93,6 +100,18 @@ private extension InputSpeedCurve {
 
     private func circEaseOut(_ p: Float) -> Float {
         return sqrt(1 - pow(p - 1, 2));
+    }
+}
+
+/// Get the descriptive names for all speed curves..
+extension InputSpeedCurve {
+    var description: String {
+        switch self {
+        case .linear:       return "Linear"
+        case .quadEaseOut:  return "Quad Ease Out"
+        case .quintEaseOut: return "Quint Ease Out"
+        case .circEaseOut:  return "Circ Ease Out"
+        }
     }
 }
 
