@@ -11,7 +11,12 @@ struct MainMenuView: View {
     var body: some View {
         TabView {
             Tab("Start", systemImage: "play") {
-                Text("Start")
+                GameMenuView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [.blue, .clear]), startPoint: .top, endPoint: .bottom)
+                    )
+                    .glassBackgroundEffect()
             }
             
             Tab("Racetrack", systemImage: "car.rear.road.lane") {
