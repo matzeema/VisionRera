@@ -13,8 +13,11 @@ class HandGestureInput: HandtrackingInputProtocol {
     var speed: Float = 0
     var speedCurve: InputSpeedCurve = .linear
     
+    /// Defines if the left or right hand should be used for input.
     var chirality: HandAnchor.Chirality = .right
     
+    /// Takes the AnchorUpdates from ARKitSessions via the HandTrackingProvider. Calulates the `speed` via the
+    /// `calculateSpeedFromThumbTip` function.
     func update(from handAnchor: AnchorUpdate<HandAnchor>) {
         let anchor = handAnchor.anchor
         guard anchor.chirality == chirality else { return } // Filter hand anchors from the wrong hand
