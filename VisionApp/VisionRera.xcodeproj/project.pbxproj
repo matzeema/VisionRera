@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426D2CEF242800F6D047 /* MainMenuView.swift */; };
+		E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426F2CEF24C000F6D047 /* GameMenuView.swift */; };
+		E12942722CEF286A00F6D047 /* InputMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12942712CEF286A00F6D047 /* InputMenuView.swift */; };
 		E146E0B02CB7E3C200F744AB /* ImmersiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */; };
 		E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AA2CB7E3C200F744AB /* ContentView.swift */; };
 		E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E129426D2CEF242800F6D047 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		E129426F2CEF24C000F6D047 /* GameMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuView.swift; sourceTree = "<group>"; };
+		E12942712CEF286A00F6D047 /* InputMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMenuView.swift; sourceTree = "<group>"; };
 		E146E0782CB6E69600F744AB /* VisionRera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionRera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveModel.swift; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
 				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
 				E19B1D952CCAED17001326CA /* WelcomeView.swift */,
+				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
 				E19B1D902CCAB038001326CA /* RaceTrack */,
 				E1CD1DC92CDAB95B0052BDBE /* Input */,
 				E1CD1DCF2CDABACC0052BDBE /* TrackDetection */,
@@ -110,6 +117,7 @@
 				E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */,
 				E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */,
 				E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */,
+				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				E1CD1DCD2CDABA840052BDBE /* GameModel.swift */,
+				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -221,7 +230,10 @@
 				E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */,
 				E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */,
 				E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */,
+				E12942722CEF286A00F6D047 /* InputMenuView.swift in Sources */,
+				E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */,
 				E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */,
+				E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */,
 				E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */,
 				E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */,
 			);

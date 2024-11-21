@@ -23,7 +23,7 @@ struct ContentView: View {
         if showLaunchView {
             WelcomeView()
         } else {
-            Text("You are ready to play.")
+            MainMenuView()
         }
     }
 }

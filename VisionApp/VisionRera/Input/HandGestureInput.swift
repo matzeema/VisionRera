@@ -20,9 +20,9 @@ class HandGestureInput: HandtrackingInputProtocol {
         case unknown
         case ok
         case authenticationNotAllowed
-        case handtrackingStopped
+        case handtrackingUnavailable
     }
-    var state: State = .unknown
+    private(set) var state: State = .unknown
     var isAvailable: Bool {
         state == .ok
     }
@@ -30,6 +30,8 @@ class HandGestureInput: HandtrackingInputProtocol {
     /// Takes the AnchorUpdates from ARKitSessions via the HandTrackingProvider. Calulates the `speed` via the
     /// `calculateSpeedFromThumbTip` function.
     func update(from handAnchor: AnchorUpdate<HandAnchor>) {
+        state = .ok // If handtracking data is received, we assume that authorization was allowed.
+        
         let anchor = handAnchor.anchor
         guard anchor.chirality == chirality else { return } // Filter hand anchors from the wrong hand
         guard let joint = anchor.handSkeleton?.joint(.thumbTip) else { return }
@@ -48,4 +50,15 @@ class HandGestureInput: HandtrackingInputProtocol {
         
         return speedResult
     }
+    
+    func onAuthenticationChanged(status: ARKitSession.AuthorizationStatus) {
+        if status == .denied { state = .authenticationNotAllowed }
+    }
+    
+    func onDataproviderStateChanged(state: DataProviderState) {
+        if self.state == .authenticationNotAllowed { return } // Prioratize authorization issues over DataProvider issues
+        if state == .paused || state == .stopped { self.state = .handtrackingUnavailable }
+    }
+    
+
 }

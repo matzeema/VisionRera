@@ -27,12 +27,24 @@ struct ImmersiveView: View {
         .onChange(of: inputModel.inputRequiresHandtrackingData, initial: true) {
             immersiveModel.enableHandTracking = inputModel.inputRequiresHandtrackingData
             
-            if immersiveModel.enableHandTracking {
+            if let handtrackingHandler = inputModel.handtrackingHandler {
                 Task {
                     for await update in immersiveModel.handTracking.anchorUpdates {
-                        inputModel.updateHandTrackingInputMethod(handAnchor: update)
+                        handtrackingHandler.update(from: update)
                     }
                 }
+            }
+        }
+        // Inform InputModel about data provider changes if a handtracking input method is selected.
+        .onChange(of: immersiveModel.handTracking.state) {
+            if let handtrackingHandler = inputModel.handtrackingHandler {
+                handtrackingHandler.onDataproviderStateChanged(state: $1)
+            }
+        }
+        // Inform InputModel about handtracking auth state changes if a handtracking input method is selected.
+        .onChange(of: immersiveModel.handTrackingAuthStatus) {
+            if let handtrackingHandler = inputModel.handtrackingHandler {
+                handtrackingHandler.onAuthenticationChanged(status: $1)
             }
         }
     }

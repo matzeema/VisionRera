@@ -30,13 +30,13 @@ class ImmersiveModel {
     
     /// The ARKitSession of the app.
     let arKitSession = ARKitSession()
+    
     var handTracking = HandTrackingProvider()
+    var handTrackingAuthStatus: ARKitSession.AuthorizationStatus = .notDetermined
     
     var enableHandTracking = false {
         didSet {
-            Task {
-                await runARKitSession()
-            }
+            Task { await runARKitSession() }
         }
     }
     
@@ -54,6 +54,17 @@ class ImmersiveModel {
         
         do {
             try await arKitSession.run(dataProviders)
+            
+            // Listen for ARKitSession events
+            for await event in arKitSession.events {
+                switch event {
+                case .authorizationChanged(type: let type, status: let status):
+                    if type == .handTracking {
+                        handTrackingAuthStatus = status
+                    }
+                default: break
+                }
+            }
         } catch {
             print("ARKitSession failed to run: \(error)")
         }
@@ -63,4 +74,8 @@ class ImmersiveModel {
         arKitSession.stop()
     }
     
+    /// This function should be used if data providers have been stoped and user wants to manually restart them.
+    func tryRerunARKitSession() async {
+        await runARKitSession()
+    }
 }
