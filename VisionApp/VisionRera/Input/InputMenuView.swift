@@ -8,6 +8,7 @@
 import SwiftUI
 import ARKit
 
+/// Lets you choose the input method and provides options for it.
 struct InputMenuView: View {
     @Environment(InputModel.self) private var inputModel
     
@@ -32,6 +33,7 @@ struct InputMenuView: View {
     }
 }
 
+/// Item to select a input method. Uses a scale effect to show if selected or not.
 private struct InputMethodView: View {
     @Environment(InputModel.self) private var inputModel
     
@@ -69,7 +71,7 @@ private struct InputMethodView: View {
                     .imageScale(.large)
                 VStack {
                     Text(title)
-                        .font(.headline)
+                        .font(.title)
                     if selected {
                         Text("SELECTED")
                             .font(.caption)
@@ -88,6 +90,7 @@ private struct InputMethodView: View {
     }
 }
 
+/// Provides a option to choose the handside and informs about issues with the Handtracking.
 private struct HandGestureOptionsView: View {
     @Environment(InputModel.self) private var inputModel
     @Environment(ImmersiveModel.self) private var immersiveModel
@@ -143,6 +146,7 @@ private struct HandGestureOptionsView: View {
     }
 }
 
+/// Provides controls infoormation and issue alerts for the Gamepad input method.
 private struct GamepadOptionsView: View {
     @Environment(InputModel.self) private var inputModel
     
@@ -194,6 +198,8 @@ private struct GamepadOptionsView: View {
     }
 }
 
+/// Pane which allows to inform the user about current issues with the input method.
+/// Allows for a optional button with actions to fix the issue.
 private struct IssueWithInputMethodView: View {
     let systemImageName: String
     let title: String
