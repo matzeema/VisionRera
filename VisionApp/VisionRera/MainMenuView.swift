@@ -34,11 +34,6 @@ struct MainMenuView: View {
                     .gradientBackground(color: .orange)
             }
             .badge(inputModel.inputIsAvailable ? nil : Text(""))
-            
-            Tab("Info", systemImage: "info.circle") {
-                Text("About this app")
-                    .gradientBackground(color: .mint)
-            }
         }
     }
 }
