@@ -31,12 +31,17 @@ class ImmersiveModel {
     /// The ARKitSession of the app.
     let arKitSession = ARKitSession()
     var handTracking = HandTrackingProvider()
+    var barcodeDetection = BarcodeDetectionProvider(symbologies: [.qr])
     
     var enableHandTracking = false {
         didSet {
-            Task {
-                await runARKitSession()
-            }
+            Task { await runARKitSession() }
+        }
+    }
+    
+    var enableBarcodeDetection = true {
+        didSet {
+            Task { await runARKitSession() }
         }
     }
     
@@ -52,8 +57,18 @@ class ImmersiveModel {
             dataProviders.append(handTracking)
         }
         
+        if BarcodeDetectionProvider.isSupported && enableBarcodeDetection {
+            barcodeDetection = BarcodeDetectionProvider(symbologies: [.qr])
+            
+            dataProviders.append(barcodeDetection)
+        }
+        
         do {
             try await arKitSession.run(dataProviders)
+            
+            for await update in barcodeDetection.anchorUpdates {
+                print(update)
+            }
         } catch {
             print("ARKitSession failed to run: \(error)")
         }

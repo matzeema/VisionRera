@@ -35,6 +35,18 @@ struct ImmersiveView: View {
                 }
             }
         }
+        .onChange(of: immersiveModel.enableHandTracking, initial: true) {
+            immersiveModel.enableHandTracking = true
+            
+            if immersiveModel.enableHandTracking {
+                Task {
+                    for await update in immersiveModel.barcodeDetection.anchorUpdates {
+                        print(update)
+                        
+                    }
+                }
+            }
+        }
     }
 }
 
