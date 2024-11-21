@@ -39,24 +39,26 @@ class InputModel {
     }
     var method: Method = .handGesture
     
-    var inputHandler: InputProtocol {
+    private var inputHandler: any InputProtocol {
         switch method {
         case .handGesture: return handGestureInput
         case .gamepad:     return gamepadInput
         }
     }
     
-    var inputRequiresHandtrackingData: Bool {
-        switch method {
-        case .handGesture: return true
-        default: return false
-        }
+    private var handtrackingHandler: (any HandtrackingInputProtocol)? {
+        return inputHandler.self as? HandtrackingInputProtocol
     }
     
+    var inputRequiresHandtrackingData: Bool {
+        return handtrackingHandler != nil
+    }
+    
+    /// Takes the AnchorUpdates from ARKitSessions via the HandTrackingProvider. Forwards the data
+    /// to the input method if it requires handtracking data.
     func updateHandTrackingInputMethod(handAnchor: AnchorUpdate<HandAnchor>) {
-        switch method {
-        case .handGesture: handGestureInput.update(from: handAnchor)
-        default: break
+        if let handtrackingHandler {
+            handtrackingHandler.update(from: handAnchor)
         }
     }
     
