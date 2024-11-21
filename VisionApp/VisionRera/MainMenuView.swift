@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct MainMenuView: View {
+    @Environment(InputModel.self) private var inputModel
+    
+    private var inputMethodSystemImage: String {
+        switch inputModel.method {
+        case .handGesture: "hand.wave"
+        case .gamepad: "gamecontroller"
+        }
+    }
+    
     var body: some View {
         TabView {
             Tab("Start", systemImage: "play") {
@@ -22,9 +31,8 @@ struct MainMenuView: View {
             Tab("Racetrack", systemImage: "car.rear.road.lane") {
                 Text("Racetrack")
             }
-            .badge("")
 
-            Tab("Controls", systemImage: "hand.wave") {
+            Tab("Controls", systemImage: inputMethodSystemImage) {
                 InputMenuView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(
@@ -33,7 +41,7 @@ struct MainMenuView: View {
                     .glassBackgroundEffect()
                     
             }
-            .badge("")
+            .badge(inputModel.inputIsAvailable ? nil : Text(""))
 
 
             Tab("Info", systemImage: "info.circle") {

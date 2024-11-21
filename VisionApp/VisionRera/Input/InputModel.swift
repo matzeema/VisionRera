@@ -57,6 +57,10 @@ class InputModel {
         return handtrackingHandler != nil
     }
     
+    var inputIsAvailable: Bool {
+        return inputHandler.isAvailable
+    }
+    
     /// The speed the user currently inputs. Allowed range is between 0.0 and 1.0. This value can differ
     /// from the actual speed send to the RaceTrack, depending on the current state of the game.
     var speed: Float {
