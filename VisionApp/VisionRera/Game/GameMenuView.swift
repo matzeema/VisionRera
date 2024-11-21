@@ -9,23 +9,22 @@ import SwiftUI
 
 struct GameMenuView: View {
     var body: some View {
-        VStack {
-            GameItemView(
-                gameItemViewModel: GameItemViewModel(
-                    name: "Rundenrennen",
-                    description: "Drive multiple laps around the track.",
-                    backgroundColor: .blue)
-            )
-            GameItemView(gameItemViewModel: GameItemViewModel(
-                name: "Free Race",
-                description: "Get rolling with no restrictions.",
-                backgroundColor: .green))
+        ScrollView {
+            VStack(spacing: 8.0) {
+                GameItemView(
+                    gameItemViewModel: GameItemViewModel(
+                        name: "Rundenrennen",
+                        description: "Drive multiple laps around the track.",
+                        backgroundColor: .blue)
+                )
+                .padding(.bottom, 16.0)
+                GameItemView(gameItemViewModel: GameItemViewModel(
+                    name: "Free Race",
+                    description: "Get rolling with no restrictions.",
+                    backgroundColor: .green))
+            }
+            .padding(32.0)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            LinearGradient(gradient: Gradient(colors: [.blue, .clear]), startPoint: .top, endPoint: .bottom)
-        )
-        .glassBackgroundEffect()
     }
 }
 
@@ -45,6 +44,7 @@ private struct GameItemView: View {
                     Text(gameItemViewModel.name)
                         .font(.title)
                     Text(gameItemViewModel.description)
+                        .foregroundStyle(.secondary)
                 }
                 
                 Spacer()
@@ -58,7 +58,6 @@ private struct GameItemView: View {
 
         }
         .hoverEffect()
-        .padding(.vertical, 8.0)
     }
 }
 
