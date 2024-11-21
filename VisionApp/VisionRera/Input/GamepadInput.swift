@@ -13,24 +13,42 @@ import GameController
 // TODO: There is currently an issue if there are more Gamepads connected than defined in the `countOfGamepads` constant. If you connect Gamepads after the value `countOfGamepads` is reached, those Gamepads will be unable to be used, even if other Gamepads are dissconected after.
 @Observable
 class GamepadInput: InputProtocol {
+    
+    /// The max amount of gamepads allowed to be used as input devices.
     static let countOfGamepads = 1
     
     var speed: Float = 0
     var speedCurve: InputSpeedCurve = .linear
     
-    private let notificationCenter = NotificationCenter.default
+    enum State {
+        case ok
+        case noGamepadConnected
+    }
+    var state: State = .noGamepadConnected
+    var isAvailable: Bool {
+        state == .ok
+    }
 
-    var gcControllers = [GCController?](repeating: nil, count: GamepadInput.countOfGamepads)
+    private var gcControllers = [GCController?](repeating: nil, count: GamepadInput.countOfGamepads) {
+        didSet {
+            let controllerConnected = gcControllers.first(where: { $0 != nil }) != nil
+            
+            if controllerConnected {
+                state = .ok
+            } else {
+                state = .noGamepadConnected
+            }
+        }
+    }
     
     init() {
-        notificationCenter.addObserver(
+        NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(self.handleControllerDidConnect),
                 name: NSNotification.Name.GCControllerDidConnect,
                 object: nil
         )
-        
-        notificationCenter.addObserver(
+        NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(self.handelControllerDisconnect(_:)),
                 name: NSNotification.Name.GCControllerDidDisconnect,
