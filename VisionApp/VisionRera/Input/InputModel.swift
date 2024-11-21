@@ -12,6 +12,7 @@ import ARKit
 protocol InputProtocol {
     var speed: Float { get set }
     var speedCurve: InputSpeedCurve { get set }
+    var isAvailable: Bool { get }
 }
 
 /// The protocol hand gesture input methods need to conforn to. Uses ARKit for Handtracking.

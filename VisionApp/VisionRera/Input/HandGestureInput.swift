@@ -16,6 +16,17 @@ class HandGestureInput: HandtrackingInputProtocol {
     /// Defines if the left or right hand should be used for input.
     var chirality: HandAnchor.Chirality = .right
     
+    enum State {
+        case unknown
+        case ok
+        case authenticationNotAllowed
+        case handtrackingStopped
+    }
+    var state: State = .unknown
+    var isAvailable: Bool {
+        state == .ok
+    }
+    
     /// Takes the AnchorUpdates from ARKitSessions via the HandTrackingProvider. Calulates the `speed` via the
     /// `calculateSpeedFromThumbTip` function.
     func update(from handAnchor: AnchorUpdate<HandAnchor>) {
