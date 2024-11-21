@@ -25,7 +25,16 @@ struct MainMenuView: View {
             .badge("")
 
             Tab("Controls", systemImage: "hand.wave") {
-                Text("Controls")
+                InputMenuView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [.orange, .clear]), startPoint: .top, endPoint: .bottom)
+                    )
+                    .glassBackgroundEffect()
+                    
+            }
+            .badge("")
+
 
             Tab("Info", systemImage: "info.circle") {
                 Text("About this app")
