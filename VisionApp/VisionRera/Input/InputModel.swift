@@ -24,13 +24,6 @@ enum InputSpeedCurve: CaseIterable {
     case quadEaseOut
     case quintEaseOut
     case circEaseOut
-    
-    func next() -> InputSpeedCurve {
-          let allCases = Self.allCases
-          guard let currentIndex = Self.allCases.firstIndex(of: self) else { return self }
-          let nextIndex = (currentIndex + 1) % allCases.count
-          return allCases[nextIndex]
-      }
 }
 
 /// Manages the state of the current input method.
@@ -103,5 +96,15 @@ private extension InputSpeedCurve {
 
     private func circEaseOut(_ p: Float) -> Float {
         return sqrt(1 - pow(p - 1, 2));
+    }
+}
+
+/// Generic enum extension to cycle through cases.
+extension InputSpeedCurve {
+    func next() -> InputSpeedCurve {
+      let allCases = Self.allCases
+      guard let currentIndex = Self.allCases.firstIndex(of: self) else { return self }
+      let nextIndex = (currentIndex + 1) % allCases.count
+      return allCases[nextIndex]
     }
 }
