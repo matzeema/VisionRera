@@ -21,33 +21,45 @@ struct MainMenuView: View {
         TabView {
             Tab("Start", systemImage: "play") {
                 GameMenuView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [.blue, .clear]), startPoint: .top, endPoint: .bottom)
-                    )
-                    .glassBackgroundEffect()
+                    .gradientBackground(color: .indigo)
             }
             
             Tab("Racetrack", systemImage: "car.rear.road.lane") {
                 Text("Racetrack")
+                    .gradientBackground(color: .purple)
             }
-
+                
             Tab("Controls", systemImage: inputMethodSystemImage) {
                 InputMenuView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(
-                        LinearGradient(gradient: Gradient(colors: [.orange, .clear]), startPoint: .top, endPoint: .bottom)
-                    )
-                    .glassBackgroundEffect()
-                    
+                    .gradientBackground(color: .orange)
             }
             .badge(inputModel.inputIsAvailable ? nil : Text(""))
-
-
+            
             Tab("Info", systemImage: "info.circle") {
                 Text("About this app")
+                    .gradientBackground(color: .mint)
             }
         }
+    }
+}
+
+/// Creates a gradient background starting from the top by going to clear at the bottom.
+private struct GradientBackgroundModifier: ViewModifier {
+    let color: Color
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                LinearGradient(gradient: Gradient(colors: [color, .clear]), startPoint: .top, endPoint: .bottom)
+            )
+            .glassBackgroundEffect()
+    }
+}
+
+private extension View {
+    func gradientBackground(color: Color) -> some View {
+        self.modifier(GradientBackgroundModifier(color: color))
     }
 }
 
