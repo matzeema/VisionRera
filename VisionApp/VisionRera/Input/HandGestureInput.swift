@@ -20,9 +20,9 @@ class HandGestureInput: HandtrackingInputProtocol {
         case unknown
         case ok
         case authenticationNotAllowed
-        case handtrackingStopped
+        case handtrackingUnavailable
     }
-    var state: State = .unknown
+    private(set) var state: State = .handtrackingUnavailable
     var isAvailable: Bool {
         state == .ok
     }
@@ -48,4 +48,15 @@ class HandGestureInput: HandtrackingInputProtocol {
         
         return speedResult
     }
+    
+    func onAuthenticationChanged(status: ARKitSession.AuthorizationStatus) {
+        if status == .denied { state = .authenticationNotAllowed }
+    }
+    
+    func onDataproviderStateChanged(state: DataProviderState) {
+        if self.state == .authenticationNotAllowed { return } // Prioratize authorization issues over DataProvider issues
+        if state == .paused || state == .stopped { self.state = .handtrackingUnavailable }
+    }
+    
+
 }

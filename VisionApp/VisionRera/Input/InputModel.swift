@@ -18,6 +18,8 @@ protocol InputProtocol {
 /// The protocol hand gesture input methods need to conforn to. Uses ARKit for Handtracking.
 protocol HandtrackingInputProtocol: InputProtocol {
     func update(from handAnchor: AnchorUpdate<HandAnchor>)
+    func onAuthenticationChanged(status: ARKitSession.AuthorizationStatus)
+    func onDataproviderStateChanged(state: DataProviderState)
 }
 
 enum InputSpeedCurve: CaseIterable {
@@ -31,8 +33,8 @@ enum InputSpeedCurve: CaseIterable {
 @MainActor
 @Observable
 class InputModel {
-    private let handGestureInput = HandGestureInput()
-    private let gamepadInput = GamepadInput()
+    let handGestureInput = HandGestureInput()
+    let gamepadInput = GamepadInput()
     
     enum Method {
         case handGesture
@@ -40,27 +42,19 @@ class InputModel {
     }
     var method: Method = .handGesture
     
-    private var inputHandler: any InputProtocol {
+    var inputHandler: any InputProtocol {
         switch method {
         case .handGesture: return handGestureInput
         case .gamepad:     return gamepadInput
         }
     }
     
-    private var handtrackingHandler: (any HandtrackingInputProtocol)? {
+    var handtrackingHandler: (any HandtrackingInputProtocol)? {
         return inputHandler.self as? HandtrackingInputProtocol
     }
     
     var inputRequiresHandtrackingData: Bool {
         return handtrackingHandler != nil
-    }
-    
-    /// Takes the AnchorUpdates from ARKitSessions via the HandTrackingProvider. Forwards the data
-    /// to the input method if it requires handtracking data.
-    func updateHandTrackingInputMethod(handAnchor: AnchorUpdate<HandAnchor>) {
-        if let handtrackingHandler {
-            handtrackingHandler.update(from: handAnchor)
-        }
     }
     
     /// The speed the user currently inputs. Allowed range is between 0.0 and 1.0. This value can differ
