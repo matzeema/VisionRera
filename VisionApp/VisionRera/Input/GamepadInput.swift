@@ -29,17 +29,7 @@ class GamepadInput: InputProtocol {
         state == .ok
     }
 
-    private var gcControllers = [GCController?](repeating: nil, count: GamepadInput.countOfGamepads) {
-        didSet {
-            let controllerConnected = gcControllers.first(where: { $0 != nil }) != nil
-            
-            if controllerConnected {
-                state = .ok
-            } else {
-                state = .noGamepadConnected
-            }
-        }
-    }
+    private var gcControllers = [GCController?](repeating: nil, count: GamepadInput.countOfGamepads)
     
     init() {
         NotificationCenter.default.addObserver(
@@ -68,6 +58,7 @@ class GamepadInput: InputProtocol {
         // Check which controller index is currently unused
         guard let arrayIndex = gcControllers.firstIndex(where: { a in a == nil }) else { return }
         gcControllers[arrayIndex] = gcController
+        state = .ok
         
         // Set the player index
         if let playerIndex = GCControllerPlayerIndex.init(rawValue: arrayIndex) {
@@ -105,6 +96,12 @@ class GamepadInput: InputProtocol {
         }) else { return }
         
         gcControllers[index] = nil
+        
+        // Update state if all gamepads are disconnected
+        let controllerConnected = gcControllers.first(where: { $0 != nil }) != nil
+        if !controllerConnected {
+            state = .noGamepadConnected
+        }
         
         print("GameController disconnect!")
         print(gcControllers.description)
