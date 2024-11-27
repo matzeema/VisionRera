@@ -21,8 +21,8 @@
 		E19B1D962CCAED1B001326CA /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D952CCAED17001326CA /* WelcomeView.swift */; };
 		E1A6F9542CF77F760035412E /* LapsRaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F9532CF77F690035412E /* LapsRaceMode.swift */; };
 		E1A6F9562CF77F800035412E /* FreeDriveMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F9552CF77F7A0035412E /* FreeDriveMode.swift */; };
-		E1A6F95A2CF780610035412E /* CrashDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F9592CF7805B0035412E /* CrashDetection.swift */; };
 		E1A6F9582CF77FA50035412E /* LapSessionFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F9572CF77F990035412E /* LapSessionFeature.swift */; };
+		E1A6F95A2CF780610035412E /* CrashDetectionFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F9592CF7805B0035412E /* CrashDetectionFeature.swift */; };
 		E1CD1DCB2CDAB9A30052BDBE /* InputModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */; };
 		E1CD1DCE2CDABA8A0052BDBE /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DCD2CDABA840052BDBE /* GameModel.swift */; };
 		E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */; };
@@ -47,8 +47,8 @@
 		E19B1D952CCAED17001326CA /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		E1A6F9532CF77F690035412E /* LapsRaceMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapsRaceMode.swift; sourceTree = "<group>"; };
 		E1A6F9552CF77F7A0035412E /* FreeDriveMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeDriveMode.swift; sourceTree = "<group>"; };
-		E1A6F9592CF7805B0035412E /* CrashDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashDetection.swift; sourceTree = "<group>"; };
 		E1A6F9572CF77F990035412E /* LapSessionFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapSessionFeature.swift; sourceTree = "<group>"; };
+		E1A6F9592CF7805B0035412E /* CrashDetectionFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashDetectionFeature.swift; sourceTree = "<group>"; };
 		E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModel.swift; sourceTree = "<group>"; };
 		E1CD1DCD2CDABA840052BDBE /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetectionModel.swift; sourceTree = "<group>"; };
@@ -131,8 +131,8 @@
 		E1A6F9522CF77F440035412E /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				E1A6F9592CF7805B0035412E /* CrashDetection.swift */,
 				E1A6F9572CF77F990035412E /* LapSessionFeature.swift */,
+				E1A6F9592CF7805B0035412E /* CrashDetectionFeature.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -267,8 +267,8 @@
 				E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */,
 				E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */,
 				E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */,
-				E1A6F95A2CF780610035412E /* CrashDetection.swift in Sources */,
 				E1A6F9582CF77FA50035412E /* LapSessionFeature.swift in Sources */,
+				E1A6F95A2CF780610035412E /* CrashDetectionFeature.swift in Sources */,
 				E12942722CEF286A00F6D047 /* InputMenuView.swift in Sources */,
 				E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */,
 				E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */,
