@@ -24,7 +24,7 @@ struct Lap {
         self.endMillis = endMillis
     }
     
-    func durationInMillis() -> UInt32? {
+    var durationInMillis: UInt32? {
         if (endMillis == nil) { return nil }
         return (endMillis! - startMillis)
     }
@@ -57,7 +57,7 @@ class LapSessionFeature {
     var lapSessionDurationInMillis: UInt32 {
         var duration: UInt32 = 0
         laps.forEach { lap in
-            duration += (lap.durationInMillis() ?? 0)
+            duration += (lap.durationInMillis ?? 0)
         }
         return duration
     }
@@ -82,9 +82,11 @@ class LapSessionFeature {
             currentLap.endMillis = millis
             
             // Ignores laps which are unpossible fast
-            if (currentLap.durationInMillis()! < LapSessionFeature.minimalLapDuration) {
-                print("Lap with lower duration than allowed registered: \(currentLap.durationInMillis() ?? 0)")
-                return
+            if let duration = currentLap.durationInMillis {
+                if (duration < LapSessionFeature.minimalLapDuration) {
+                    print("Lap with lower duration than allowed registered: \(duration)")
+                    return
+                }
             }
             
             laps.append(currentLap)
