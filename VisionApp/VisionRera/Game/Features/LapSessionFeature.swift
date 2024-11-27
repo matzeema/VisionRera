@@ -10,7 +10,7 @@ import Combine
 
 /// Protocol game modes have to conform to to use the LapSession feature.
 protocol LapSessionProtocol {
-    var lapSessionFeatures: LapSessionFeature { get set }
+    var lapSessionFeature: LapSessionFeature { get set }
 }
 
 struct Lap {
