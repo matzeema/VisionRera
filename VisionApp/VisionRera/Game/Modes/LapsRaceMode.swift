@@ -10,4 +10,5 @@ import Foundation
 @Observable
 class LapsRaceMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
     var speedToRaceTrackState: SpeedToRacetrackState = .stop
+    var lapSessionFeatures: LapSessionFeature = LapSessionFeature()
 }

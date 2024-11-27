@@ -10,6 +10,6 @@ import Foundation
 @Observable
 class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
     var speedToRaceTrackState: SpeedToRacetrackState = .stop
-    
+    var lapSessionFeatures: LapSessionFeature = LapSessionFeature()
     
 }

@@ -1,0 +1,97 @@
+//
+//  LapSessionManager.swift
+//  VisionRera
+//
+//  Created by Mattias Emanuel on 27.11.24.
+//
+
+import Foundation
+import Combine
+
+/// Protocol game modes have to conform to to use the LapSession feature.
+protocol LapSessionProtocol {
+    var lapSessionFeatures: LapSessionFeature { get set }
+}
+
+struct Lap {
+    let lapNumber: Int
+    var startMillis: UInt32
+    var endMillis: UInt32?
+    
+    init(lapNumber: Int, startMillis: UInt32, endMillis: UInt32? = nil) {
+        self.lapNumber = lapNumber
+        self.startMillis = startMillis
+        self.endMillis = endMillis
+    }
+    
+    func durationInMillis() -> UInt32? {
+        if (endMillis == nil) { return nil }
+        return (endMillis! - startMillis)
+    }
+    
+    func isFinished() -> Bool {
+        return (endMillis != nil)
+    }
+}
+
+/// Manages the times of the laps on the specified `RaceTrackSlot`.
+class LapSessionFeature {
+    
+    /// The minimal duration a lap can take. Anything under that value gets treated as sensor issues or cheating by the user.
+    static let minimalLapDuration = 500
+    
+    /// Combine subject to track changes on the current lap.
+    let onLapFinished = PassthroughSubject<Lap, Never>()
+    
+    /// The slot the session applies to. Might be useful in the future.
+    let slot: RaceTrackSlot
+    
+    private var isMeasureingLaps = false
+    private(set) var laps: [Lap] = []
+    private(set) var currentLap: Lap?
+    
+    var currentLapNumber: Int {
+        return (currentLap?.lapNumber ?? 0)
+    }
+    
+    var lapSessionDurationInMillis: UInt32 {
+        var duration: UInt32 = 0
+        laps.forEach { lap in
+            duration += (lap.durationInMillis() ?? 0)
+        }
+        return duration
+    }
+    
+    init(slot: RaceTrackSlot = RaceTrackSlot.defaultSlot) {
+        self.slot = slot
+    }
+    
+    func start() {
+        if (!isMeasureingLaps) {
+            isMeasureingLaps = true
+        }
+    }
+    
+    func stop() {
+        isMeasureingLaps = false
+        currentLap = nil
+    }
+    
+    func carDroveOverFinishline(_ millis: UInt32) {
+        if var currentLap = currentLap {
+            currentLap.endMillis = millis
+            
+            // Ignores laps which are unpossible fast
+            if (currentLap.durationInMillis()! < LapSessionFeature.minimalLapDuration) {
+                print("Lap with lower duration than allowed registered: \(currentLap.durationInMillis() ?? 0)")
+                return
+            }
+            
+            laps.append(currentLap)
+            onLapFinished.send(currentLap)
+        }
+        
+        // Instantly start a new lap after one finished
+        currentLap = Lap(lapNumber: (laps.count + 1), startMillis: millis)
+    }
+}
