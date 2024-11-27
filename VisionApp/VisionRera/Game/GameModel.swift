@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// Define features of a game modes as protocols.
 enum SpeedToRacetrackState {
     case stop
     case racing(speed: Float)
@@ -21,6 +20,8 @@ protocol GameModeProtocol {
 @MainActor
 @Observable
 class GameModel {
+    private var gameModel: GameModeProtocol?
+    
     enum Mode {
         case freeDrive
         case lapsRace
