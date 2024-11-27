@@ -20,13 +20,26 @@ protocol GameModeProtocol {
 @MainActor
 @Observable
 class GameModel {
-    private var gameModel: GameModeProtocol?
     
     enum Mode {
+        case none
         case freeDrive
         case lapsRace
     }
-    var mode: Mode = .freeDrive
+    var mode: Mode = .none {
+        didSet {
+            switch mode {
+            case .none:      gameModeHandler = nil
+            case .freeDrive: gameModeHandler = FreeDriveMode()
+            case .lapsRace:  gameModeHandler = LapsRaceMode()
+            }
+        }
+    }
     
+    private(set) var gameModeHandler: (any GameModeProtocol)?
+    
+    var lapSessionFeature: LapSessionProtocol? {
+        gameModeHandler as? LapSessionProtocol
+    }
     
 }
