@@ -97,7 +97,7 @@
 				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
 				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
 				E19B1D952CCAED17001326CA /* WelcomeView.swift */,
-				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
+				E1A6F95B2CF781870035412E /* MainMenu */,
 				E19B1D902CCAB038001326CA /* RaceTrack */,
 				E1CD1DC92CDAB95B0052BDBE /* Input */,
 				E1CD1DCF2CDABACC0052BDBE /* TrackDetection */,
@@ -137,13 +137,23 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
+		E1A6F95B2CF781870035412E /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
+				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
+				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
+				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
+			);
+			path = MainMenu;
+			sourceTree = "<group>";
+		};
 		E1CD1DC92CDAB95B0052BDBE /* Input */ = {
 			isa = PBXGroup;
 			children = (
 				E1CD1DCA2CDAB99E0052BDBE /* InputModel.swift */,
 				E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */,
 				E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */,
-				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -152,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				E1CD1DCD2CDABA840052BDBE /* GameModel.swift */,
-				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
 				E1A6F9512CF77F380035412E /* Modes */,
 				E1A6F9522CF77F440035412E /* Features */,
 			);
@@ -171,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */,
-				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
 			);
 			path = Immersive;
 			sourceTree = "<group>";
