@@ -143,7 +143,6 @@
 				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
 				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
-				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -180,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */,
+				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
 			);
 			path = Immersive;
 			sourceTree = "<group>";
