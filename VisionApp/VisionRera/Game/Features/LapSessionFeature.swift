@@ -20,6 +20,10 @@ struct Lap {
     var startMillis: UInt32
     var endMillis: UInt32?
     
+    var isFinished: Bool {
+        return (endMillis != nil)
+    }
+    
     init(lapNumber: Int, startMillis: UInt32, endMillis: UInt32? = nil) {
         self.lapNumber = lapNumber
         self.startMillis = startMillis
@@ -29,10 +33,6 @@ struct Lap {
     var durationInMillis: UInt32? {
         if (endMillis == nil) { return nil }
         return (endMillis! - startMillis)
-    }
-    
-    func isFinished() -> Bool {
-        return (endMillis != nil)
     }
 }
 
