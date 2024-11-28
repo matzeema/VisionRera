@@ -62,8 +62,8 @@ class LapSessionFeature {
         return (currentLap?.lapNumber ?? 0)
     }
     
-    var lapSessionDurationInMillis: UInt32 {
     /// The duration of all laps summed up.
+    var durationOfSessionInMillis: UInt32 {
         var duration: UInt32 = 0
         laps.forEach { lap in
             duration += (lap.durationInMillis ?? 0)
