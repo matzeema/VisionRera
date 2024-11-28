@@ -46,10 +46,15 @@ class LapSessionFeature {
     let onLapFinished = PassthroughSubject<Lap, Never>()
     
     /// Enables or disables the measurement of labs.
+    var enabled = false {
+        didSet {
+            if !enabled { currentLap = nil }
+        }
+    }
+    
     /// The slot on the RaceTrack the session applies to.
     let slot: RaceTrackSlot
     
-    private var isMeasureingLaps = false
     private(set) var laps: [Lap] = []
     private(set) var currentLap: Lap?
     
@@ -70,18 +75,9 @@ class LapSessionFeature {
         self.slot = slot
     }
     
-    func start() {
-        if (!isMeasureingLaps) {
-            isMeasureingLaps = true
-        }
-    }
-    
-    func stop() {
-        isMeasureingLaps = false
-        currentLap = nil
-    }
-    
     func carDroveOverFinishline(_ millis: UInt32) {
+        if enabled == false { return }
+        
         if var currentLap = currentLap {
             currentLap.endMillis = millis
             
