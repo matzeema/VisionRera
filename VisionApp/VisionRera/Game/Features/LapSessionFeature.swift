@@ -42,8 +42,9 @@ class LapSessionFeature {
     /// The minimal duration a lap can take. Anything under that value gets treated as sensor issues or cheating by the user.
     static let minimalLapDuration = 500
     
-    /// Combine subject to track changes on the current lap.
-    let onLapFinished = PassthroughSubject<Lap, Never>()
+    /// Combine publisher to track changes on the current lap.
+    var onLapFinishedPublisher: AnyPublisher<Lap, Never> { onLapFinished.eraseToAnyPublisher() }
+    private let onLapFinished = PassthroughSubject<Lap, Never>()
     
     /// Enables or disables the measurement of labs.
     var enabled = false {
