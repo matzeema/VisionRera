@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @Environment(ImmersiveModel.self) private var immersiveModel
     @Environment(RaceTrackModel.self) private var raceTrackModel
+    @Environment(GameModel.self) private var gameModel
     
     var showLaunchView: Bool {
         return immersiveModel.immersiveSpaceState != .open ||
@@ -22,8 +23,12 @@ struct ContentView: View {
     var body: some View {
         if showLaunchView {
             WelcomeView()
-        } else {
+            
+        } else if (gameModel.mode == .none) {
             MainMenuView()
+            
+        } else {
+            GameView()
         }
     }
 }
