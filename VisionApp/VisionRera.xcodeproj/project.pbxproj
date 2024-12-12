@@ -28,6 +28,7 @@
 		E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */; };
 		E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */; };
 		E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */; };
+		E1F4F5E22CF9E1B5000BBD00 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F4F5E12CF9E08B000BBD00 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetectionModel.swift; sourceTree = "<group>"; };
 		E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureInput.swift; sourceTree = "<group>"; };
 		E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamepadInput.swift; sourceTree = "<group>"; };
+		E1F4F5E12CF9E08B000BBD00 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
 				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
 				E19B1D952CCAED17001326CA /* WelcomeView.swift */,
+				E1F4F5E12CF9E08B000BBD00 /* GameView.swift */,
 				E1A6F95B2CF781870035412E /* MainMenu */,
 				E19B1D902CCAB038001326CA /* RaceTrack */,
 				E1CD1DC92CDAB95B0052BDBE /* Input */,
@@ -271,6 +274,7 @@
 				E1A6F95A2CF780610035412E /* CrashDetectionFeature.swift in Sources */,
 				E12942722CEF286A00F6D047 /* InputMenuView.swift in Sources */,
 				E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */,
+				E1F4F5E22CF9E1B5000BBD00 /* GameView.swift in Sources */,
 				E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */,
 				E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */,
 				E1A6F9542CF77F760035412E /* LapsRaceMode.swift in Sources */,
