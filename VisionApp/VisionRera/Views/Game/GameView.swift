@@ -14,14 +14,10 @@ struct GameView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                Text(gameMode.mode?.metadata.name ?? "Unknown Game Mode")
-                    .font(.largeTitle)
-                    .padding(.bottom, 1.0)
-                Label("Gamecontroller", systemImage: "gamecontroller")
-                    .foregroundStyle(.secondary)
-            }
-            .padding(12.0)
+            Text(gameMode.mode?.metadata.name ?? "Unknown Game Mode")
+                .font(.largeTitle)
+                .padding(12.0)
+            
             
             
             Button("Exit game", systemImage: "xmark", action: {
@@ -32,11 +28,13 @@ struct GameView: View {
                 "Exit game",
                 isPresented: $showingAlert,
                 actions: {
-                    Button("Exit", role: .destructive) { }
+                    Button("Exit", role: .destructive) {
+                        gameMode.mode = nil
+                    }
                     Button("Cancel", role: .cancel) {}
                 },
                 message: {
-                    Text("All progress will be lost and no highscore will be saved.")
+                    Text("No highscores will be stored.")
                 }
             )
         }
