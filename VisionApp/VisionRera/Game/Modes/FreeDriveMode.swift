@@ -19,6 +19,8 @@ class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtoco
         onLapFinishedSubscription = lapSessionFeature.onLapFinishedPublisher.sink { lap in
             print(lap)
         }
+        
+        lapSessionFeature.enabled = true
     }
     
     func onSpeedInputChanged(speed: Float) {
