@@ -9,12 +9,13 @@ import SwiftUI
 
 /// Shows the controls like stopping the game for the current GameMode.
 struct GameView: View {
+    @Environment(GameModel.self) private var gameMode
     @State private var showingAlert = false
     
     var body: some View {
         VStack {
             VStack {
-                Text("Lapsrace")
+                Text(gameMode.mode?.metadata.name ?? "Unknown Game Mode")
                     .font(.largeTitle)
                     .padding(.bottom, 1.0)
                 Label("Gamecontroller", systemImage: "gamecontroller")
