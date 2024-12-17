@@ -144,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
-				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
+				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
