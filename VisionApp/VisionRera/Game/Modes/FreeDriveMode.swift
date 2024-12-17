@@ -20,4 +20,8 @@ class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtoco
             print(lap)
         }
     }
+    
+    func onSpeedInputChanged(speed: Float) {
+        speedToRaceTrackState = .racing(speed: speed)
+    }
 }

@@ -19,6 +19,8 @@ enum SpeedToRacetrackState {
 /// the current speed state.
 protocol GameModeProtocol {
     var speedToRaceTrackState: SpeedToRacetrackState { get set }
+    
+    func onSpeedInputChanged(speed: Float)
 }
 
 /// Manages the state of the game.

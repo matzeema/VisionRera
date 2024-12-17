@@ -11,4 +11,8 @@ import Foundation
 class LapsRaceMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
     var speedToRaceTrackState: SpeedToRacetrackState = .stop
     var lapSessionFeature: LapSessionFeature = LapSessionFeature()
+    
+    func onSpeedInputChanged(speed: Float) {
+        
+    }
 }
