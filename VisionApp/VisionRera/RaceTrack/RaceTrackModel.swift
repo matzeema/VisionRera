@@ -209,10 +209,12 @@ class RaceTrackModel : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate 
     
     // MARK: - Getter/Setter for slot data
     
-    func setSpeed(slot: RaceTrackSlot = .defaultSlot, speed: UInt8) {
+    func setSpeed(slot: RaceTrackSlot = .defaultSlot, speed: Float) {
         if let raceTrackSlotData = getRaceTrackSlotCharacs(slot),
            let charac = raceTrackSlotData.speedCharac {
-            cbPeripheral?.writeValue(Data([speed]), for: charac, type: CBCharacteristicWriteType.withoutResponse)
+            
+            let speedAsUInt8 = UInt8(speed * 255)
+            cbPeripheral?.writeValue(Data([speedAsUInt8]), for: charac, type: CBCharacteristicWriteType.withoutResponse)
         }
     }
     
