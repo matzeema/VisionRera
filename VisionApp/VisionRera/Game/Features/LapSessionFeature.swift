@@ -15,8 +15,8 @@ protocol LapSessionProtocol {
 
 /// Defines the duration and number of a lab. Uses the millis since the Racetrack-Microcontroller booted to calulate
 /// the duration. By that, delays introduced via the BLE connection aren't transferd to the measurements.
-struct Lap {
-    let lapNumber: Int
+struct Lap: Identifiable {
+    let id: Int
     var startMillis: UInt32
     var endMillis: UInt32?
     
@@ -25,7 +25,7 @@ struct Lap {
     }
     
     init(lapNumber: Int, startMillis: UInt32, endMillis: UInt32? = nil) {
-        self.lapNumber = lapNumber
+        self.id = lapNumber
         self.startMillis = startMillis
         self.endMillis = endMillis
     }
@@ -60,7 +60,7 @@ class LapSessionFeature {
     private(set) var currentLap: Lap?
     
     var currentLapNumber: Int {
-        return (currentLap?.lapNumber ?? 0)
+        return (currentLap?.id ?? 0)
     }
     
     /// The duration of all laps summed up.
