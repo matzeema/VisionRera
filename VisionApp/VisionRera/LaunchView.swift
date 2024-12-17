@@ -9,7 +9,7 @@ import SwiftUI
 import CoreBluetooth
 
 /// Welcomes the user with the app title and informs about the connection with the RaceTrack and the ImmersiveSpace.
-struct WelcomeView: View {
+struct LaunchView: View {
     @Environment(ImmersiveModel.self) private var immersiveModel
     @Environment(RaceTrackModel.self) private var raceTrackModel
     
@@ -228,7 +228,7 @@ private struct SetupInfoView<Icon: View>: View {
 }
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
-    WelcomeView()
+    LaunchView()
         .environment(ImmersiveModel())
         .environment(RaceTrackModel())
 }

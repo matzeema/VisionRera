@@ -39,7 +39,7 @@ struct MainMenuView: View {
 }
 
 /// Creates a gradient background starting from the top by going to clear at the bottom.
-private struct GradientBackgroundModifier: ViewModifier {
+struct GradientBackgroundModifier: ViewModifier {
     let color: Color
     
     func body(content: Content) -> some View {
@@ -52,7 +52,7 @@ private struct GradientBackgroundModifier: ViewModifier {
     }
 }
 
-private extension View {
+extension View {
     func gradientBackground(color: Color) -> some View {
         self.modifier(GradientBackgroundModifier(color: color))
     }

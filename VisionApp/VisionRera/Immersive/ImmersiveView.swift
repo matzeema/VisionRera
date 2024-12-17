@@ -47,6 +47,12 @@ struct ImmersiveView: View {
                 handtrackingHandler.onAuthenticationChanged(status: $1)
             }
         }
+        // Inform GameModel about finishline sensor triggers if a game mode with lap session feature is selected.
+        .onChange(of: raceTrackModel.getLastTriggerFinishlineSensor() ?? 0) {
+            if let mode = gameModel.lapSessionFeature {
+                mode.lapSessionFeature.carDroveOverFinishline($1)
+            }
+        }
     }
 }
 

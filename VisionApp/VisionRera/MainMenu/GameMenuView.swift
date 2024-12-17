@@ -8,42 +8,34 @@
 import SwiftUI
 
 struct GameMenuView: View {
+    @Environment(GameModel.self) private var gameModel
+    
     var body: some View {
         ScrollView {
-            VStack(spacing: 8.0) {
-                GameItemView(
-                    gameItemViewModel: GameItemViewModel(
-                        name: "Rundenrennen",
-                        description: "Drive multiple laps around the track.",
-                        backgroundColor: .blue)
-                )
-                .padding(.bottom, 16.0)
-                GameItemView(gameItemViewModel: GameItemViewModel(
-                    name: "Free Race",
-                    description: "Get rolling with no restrictions.",
-                    backgroundColor: .green))
+            VStack(spacing: 16.0) {
+                ForEach(GameModel.Mode.allCases, id: \.rawValue) { mode in
+                    GameItemView(
+                        name: mode.metadata.name,
+                        description: mode.metadata.description
+                    )
+                }
             }
             .padding(32.0)
         }
     }
 }
 
-struct GameItemViewModel {
+private struct GameItemView: View {
     let name: String
     let description: String
-    let backgroundColor: Color
-}
-
-private struct GameItemView: View {
-    let gameItemViewModel: GameItemViewModel
     
     var body: some View {
         GroupBox {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(gameItemViewModel.name)
+                    Text(name)
                         .font(.title)
-                    Text(gameItemViewModel.description)
+                    Text(description)
                         .foregroundStyle(.secondary)
                 }
                 
@@ -64,5 +56,6 @@ private struct GameItemView: View {
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     GameMenuView()
         .environment(RaceTrackModel())
+        .environment(GameModel())
         
 }
