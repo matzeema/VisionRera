@@ -24,8 +24,8 @@ struct Lap: Identifiable {
         return (endMillis != nil)
     }
     
-    init(lapNumber: Int, startMillis: UInt32, endMillis: UInt32? = nil) {
-        self.id = lapNumber
+    init(id: Int, startMillis: UInt32, endMillis: UInt32? = nil) {
+        self.id = id
         self.startMillis = startMillis
         self.endMillis = endMillis
     }
@@ -95,6 +95,6 @@ class LapSessionFeature {
         }
         
         // Instantly start a new lap after one finished
-        currentLap = Lap(lapNumber: (laps.count + 1), startMillis: millis)
+        currentLap = Lap(id: (laps.count + 1), startMillis: millis)
     }
 }
