@@ -47,9 +47,17 @@ struct ImmersiveView: View {
                 handtrackingHandler.onAuthenticationChanged(status: $1)
             }
         }
+        
+        // Inform the selected GameMode about changes of the input speed.
         .onChange(of: inputModel.speed) {
             if let gameModeHandler = gameModel.gameModeHandler {
                 gameModeHandler.onSpeedInputChanged(speed: $1)
+            }
+        }
+        // Update the speed on the RaceTrack with the one delivered by the GameModel.
+        .onChange(of: gameModel.gameModeHandler?.speedToRaceTrack) {
+            if let speed = $1 {
+                raceTrackModel.setSpeed(speed: speed)
             }
         }
         // Inform GameModel about finishline sensor triggers if a game mode with lap session feature is selected.
