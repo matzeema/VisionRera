@@ -97,10 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */,
-				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
-				E19B1D952CCAED17001326CA /* LaunchView.swift */,
-				E1F4F5E12CF9E08B000BBD00 /* GameView.swift */,
-				E1A6F95B2CF781870035412E /* MainMenu */,
+				E19BCC062D11F7A2003D802C /* Views */,
 				E19B1D902CCAB038001326CA /* RaceTrack */,
 				E1CD1DC92CDAB95B0052BDBE /* Input */,
 				E1CD1DCF2CDABACC0052BDBE /* TrackDetection */,
@@ -120,6 +117,34 @@
 				E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */,
 			);
 			path = RaceTrack;
+			sourceTree = "<group>";
+		};
+		E19BCC062D11F7A2003D802C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E146E0AA2CB7E3C200F744AB /* ContentView.swift */,
+				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
+				E19BCC082D11F833003D802C /* Launch */,
+				E1A6F95B2CF781870035412E /* MainMenu */,
+				E19BCC072D11F7AE003D802C /* Game */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E19BCC072D11F7AE003D802C /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				E1F4F5E12CF9E08B000BBD00 /* GameView.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		E19BCC082D11F833003D802C /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				E19B1D952CCAED17001326CA /* LaunchView.swift */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		E1A6F9512CF77F380035412E /* Modes */ = {
@@ -182,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */,
-				E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */,
 			);
 			path = Immersive;
 			sourceTree = "<group>";
