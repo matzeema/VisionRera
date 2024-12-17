@@ -10,7 +10,7 @@ import Combine
 
 @Observable
 class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
-    var speedToRaceTrackState: SpeedToRacetrackState = .stop
+    var speedToRaceTrack: Float = 0
     var lapSessionFeature: LapSessionFeature = LapSessionFeature()
     
     private var onLapFinishedSubscription: AnyCancellable?
@@ -22,6 +22,6 @@ class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtoco
     }
     
     func onSpeedInputChanged(speed: Float) {
-        speedToRaceTrackState = .racing(speed: speed)
+        speedToRaceTrack = speed
     }
 }

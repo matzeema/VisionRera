@@ -8,17 +8,10 @@
 import Foundation
 import SwiftUI
 
-/// The state of the speed of the user controlled car. The slot of the RaceTrack is
-/// defined in the RaceTrackModel via the `defaultSlot`.
-enum SpeedToRacetrackState {
-    case stop
-    case racing(speed: Float)
-}
-
 /// The protocol every game mode has to conform to. Provides default options like
 /// the current speed state.
 protocol GameModeProtocol {
-    var speedToRaceTrackState: SpeedToRacetrackState { get set }
+    var speedToRaceTrack: Float { get set }
     
     func onSpeedInputChanged(speed: Float)
 }
