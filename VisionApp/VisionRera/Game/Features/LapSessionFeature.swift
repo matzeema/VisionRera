@@ -37,6 +37,7 @@ struct Lap: Identifiable {
 }
 
 /// Manages the times of the laps on the specified `RaceTrackSlot`.
+@Observable
 class LapSessionFeature {
     
     /// The minimal duration a lap can take. Anything under that value gets treated as sensor issues or cheating by the user.
