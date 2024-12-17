@@ -28,13 +28,19 @@ struct GameView: View {
                 showingAlert = true
             })
             .padding(12.0)
-            .alert("Exit game", isPresented: $showingAlert) {
-                Button("Exit", role: .destructive) { }
-                Button("Cancel", role: .cancel) {}
-            }
+            .alert(
+                "Exit game",
+                isPresented: $showingAlert,
+                actions: {
+                    Button("Exit", role: .destructive) { }
+                    Button("Cancel", role: .cancel) {}
+                },
+                message: {
+                    Text("All progress will be lost and no highscore will be saved.")
+                }
+            )
         }
         .gradientBackground(color: .indigo)
-        .frame(width: 400, height: 250)
     }
 }
 
