@@ -38,25 +38,7 @@ struct MainMenuView: View {
     }
 }
 
-/// Creates a gradient background starting from the top by going to clear at the bottom.
-struct GradientBackgroundModifier: ViewModifier {
-    let color: Color
-    
-    func body(content: Content) -> some View {
-        content
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                LinearGradient(gradient: Gradient(colors: [color, .clear]), startPoint: .top, endPoint: .bottom)
-            )
-            .glassBackgroundEffect()
-    }
-}
 
-extension View {
-    func gradientBackground(color: Color) -> some View {
-        self.modifier(GradientBackgroundModifier(color: color))
-    }
-}
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     MainMenuView()

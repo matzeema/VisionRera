@@ -104,13 +104,13 @@ private struct HandGestureOptionsView: View {
             if !handGestureInput.isAvailable {
                 switch handGestureInput.state {
                 case .authenticationNotAllowed:
-                    IssueWithInputMethodView(
+                    InfoGroupBox(
                         systemImageName: "hand.raised",
                         title: "Allow hand tracking",
                         description: "Go to settings and allow Worldsensing for VisionRera."
                     )
                 case .handtrackingUnavailable:
-                    IssueWithInputMethodView(
+                    InfoGroupBox(
                         systemImageName: "vision.pro.badge.exclamationmark",
                         title: "Handtracking stopped",
                         description: "The device cannot track your hands.",
@@ -157,7 +157,7 @@ private struct GamepadOptionsView: View {
             
             // Inform that no gamepad in connected
             if gamepadInput.state == .noGamepadConnected {
-                IssueWithInputMethodView(
+                InfoGroupBox(
                     systemImageName: "gamecontroller",
                     title: "No Gamecontroller connected",
                     description: "Go to Bluetooth settings and connect a Gamecontroller."
@@ -194,45 +194,7 @@ private struct GamepadOptionsView: View {
     }
 }
 
-/// Pane which allows to inform the user about current issues with the input method.
-/// Allows for a optional button with actions to fix the issue.
-private struct IssueWithInputMethodView: View {
-    let systemImageName: String
-    let title: String
-    let description: String
-    
-    let action: (() -> Void)?
-    let actionTitle: String?
-    
-    init(systemImageName: String, title: String, description: String, action: (() -> Void)? = nil, actionTitle: String? = nil) {
-        self.systemImageName = systemImageName
-        self.title = title
-        self.description = description
-        self.action = action
-        self.actionTitle = actionTitle
-    }
-    
-    var body: some View {
-        GroupBox {
-            HStack {
-                Image(systemName: systemImageName)
-                    .imageScale(.large)
-                    .padding(.horizontal, 8.0)
 
-                VStack(alignment: .leading) {
-                    Text(title).font(.headline)
-                    Text(description)
-                }
-                
-                if let action, let actionTitle {
-                    Spacer()
-                    Button(actionTitle, action: action)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-}
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     InputMenuView()
