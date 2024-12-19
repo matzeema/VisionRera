@@ -9,22 +9,37 @@ import SwiftUI
 
 struct GameMenuView: View {
     @Environment(GameModel.self) private var gameModel
+    @Environment(InputModel.self) private var inputModel
+    
+    var allRequiredDataIsAvailable: Bool {
+        inputModel.inputIsAvailable
+    }
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 16.0) {
-                // TODO: Inform user about possible issues with Input or RaceTrack Detection
-                // TODO: Don't allow starting a GameMode if any of the issues from above is active
-                
-                ForEach(GameModel.Mode.allCases, id: \.rawValue) { mode in
-                    GameItemView(
-                        name: mode.metadata.name,
-                        description: mode.metadata.description,
-                        startGameAction: {
-                            gameModel.mode = mode
-                        }
+            VStack {
+                if !inputModel.inputIsAvailable {
+                    InfoGroupBox(
+                        systemImageName: "exclamationmark.circle",
+                        title: "Input method not available",
+                        description: "Go to the Input Settings and update your input method."
                     )
+                    .padding(.bottom, 16.0)
                 }
+                
+                VStack(spacing: 16.0) {
+                    ForEach(GameModel.Mode.allCases, id: \.rawValue) { mode in
+                        GameItemView(
+                            name: mode.metadata.name,
+                            description: mode.metadata.description,
+                            enabled: allRequiredDataIsAvailable,
+                            startGameAction: {
+                                gameModel.mode = mode
+                            }
+                        )
+                    }
+                }
+                .foregroundStyle(allRequiredDataIsAvailable ? .primary : .secondary)
             }
             .padding(32.0)
         }
@@ -34,6 +49,7 @@ struct GameMenuView: View {
 private struct GameItemView: View {
     let name: String
     let description: String
+    let enabled: Bool
     let startGameAction: () -> Void
     
     var body: some View {
@@ -52,10 +68,9 @@ private struct GameItemView: View {
                     action: startGameAction,
                     label: { Text("Start") }
                 )
+                .disabled(!enabled)
             }
             .padding(8.0)
-            .frame(width: 500, alignment: .leading)
-
         }
         .hoverEffect()
     }

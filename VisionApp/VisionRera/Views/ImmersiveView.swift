@@ -54,10 +54,17 @@ struct ImmersiveView: View {
                 gameModeHandler.onSpeedInputChanged(speed: $1)
             }
         }
+        // Inform the GameModel about if input is not available anymore.
+        .onChange(of: inputModel.inputIsAvailable) {
+            gameModel.onInputAvailabilityChanged(isAvailable: $1)
+        }
         // Update the speed on the RaceTrack with the one delivered by the GameModel.
         .onChange(of: gameModel.gameModeHandler?.speedToRaceTrack) {
             if let speed = $1 {
                 raceTrackModel.setSpeed(speed: speed)
+            } else {
+                // Stop the cars if GameMode was canceled.
+                raceTrackModel.setSpeed(speed: 0.0)
             }
         }
         // Inform GameModel about finishline sensor triggers if a game mode with lap session feature is selected.
