@@ -30,7 +30,7 @@ struct ContentView: View {
         if showLaunchView {
             LaunchView()
             
-        } else if (gameModel.mode == .none) {
+        } else if (gameModel.mode == nil) {
             MainMenuView()
             
         } else {
