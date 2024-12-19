@@ -58,8 +58,8 @@ extension GameModel.Mode {
     
     var metadata: Metadata {
         switch self {
-            case .freeDrive: return Metadata(name: "Free Drive", description: "Drive with no restrictions")
-            case .lapsRace:  return Metadata(name: "Laps Race", description: "Go to your limit against the clock")
+            case .freeDrive: return Metadata(name: "Free Drive", description: "Drive with no restrictions.")
+            case .lapsRace:  return Metadata(name: "Laps Race", description: "Go to your limit against the clock!")
         }
     }
 }
