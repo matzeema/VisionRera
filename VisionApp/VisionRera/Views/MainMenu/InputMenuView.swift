@@ -13,19 +13,36 @@ struct InputMenuView: View {
     @Environment(InputModel.self) private var inputModel
     
     var body: some View {
+        @Bindable var handGestureInput = inputModel.handGestureInput
+        
         ScrollView {
             VStack {
                 // Selected input method
                 HStack(spacing: 24.0) {
-                    InputMethodView(.handGesture)
-                    InputMethodView(.gamepad)
+                    ForEach(InputModel.Method.allCases, id: \.rawValue) { method in
+                        InputMethodView(
+                            inputMethod: method,
+                            selected: inputModel.method == method,
+                            selectMethod: { method in
+                                inputModel.method = method
+                            }
+                        )
+                    }
                 }
                 .padding(.bottom, 24.0)
                 
                 // Input method options
                 switch inputModel.method {
-                case .handGesture: HandGestureOptionsView()
-                case .gamepad: GamepadOptionsView()
+                case .handGesture:
+                    HandGestureOptionsView(
+                        handGestureInput: inputModel.handGestureInput,
+                        chirality: $handGestureInput.chirality
+                    )
+                case .gamepad:
+                    GamepadOptionsView(
+                        speedFormated: inputModel.speedFormated,
+                        gamepadInput: inputModel.gamepadInput
+                    )
                 }
             }
             .padding(32)
@@ -35,14 +52,16 @@ struct InputMenuView: View {
 
 /// Item to select a input method. Uses a scale effect to show if selected or not.
 private struct InputMethodView: View {
-    @Environment(InputModel.self) private var inputModel
-    
     let inputMethod: InputModel.Method
     let imageSystemName: String
     let title: String
+    let selected: Bool
+    let selectMethod: (_ method: InputModel.Method) -> Void
     
-    init(_ inputMethod: InputModel.Method) {
+    init(inputMethod: InputModel.Method, selected: Bool, selectMethod: @escaping (_ method: InputModel.Method) -> Void) {
         self.inputMethod = inputMethod
+        self.selected = selected
+        self.selectMethod = selectMethod
         
         switch inputMethod {
         case .handGesture:
@@ -54,13 +73,9 @@ private struct InputMethodView: View {
         }
     }
     
-    var selected: Bool {
-        inputMethod == inputModel.method
-    }
-    
     func selectMethodAction() {
         withAnimation(.smooth) {
-            inputModel.method = inputMethod
+            selectMethod(inputMethod)
         }
     }
     
@@ -92,14 +107,13 @@ private struct InputMethodView: View {
 
 /// Provides a option to choose the handside and informs about issues with the Handtracking.
 private struct HandGestureOptionsView: View {
-    @Environment(InputModel.self) private var inputModel
     @Environment(ImmersiveModel.self) private var immersiveModel
     
+    let handGestureInput: HandGestureInput
+    @Binding var chirality: HandAnchor.Chirality
+    
     var body: some View {
-        @Bindable var handGestureInput: HandGestureInput = inputModel.handGestureInput
-        
         VStack {
-            
             // Inform about possible issues
             if !handGestureInput.isAvailable {
                 switch handGestureInput.state {
@@ -136,7 +150,7 @@ private struct HandGestureOptionsView: View {
                     }
                     .padding(.horizontal, 8.0)
                     Spacer()
-                    Picker("Handposition", selection: $handGestureInput.chirality) {
+                    Picker("Handposition", selection: $chirality) {
                         Text("Left").tag(HandAnchor.Chirality.left)
                         Text("Right").tag(HandAnchor.Chirality.right)
                     }
@@ -148,13 +162,11 @@ private struct HandGestureOptionsView: View {
 
 /// Provides controls infoormation and issue alerts for the Gamepad input method.
 private struct GamepadOptionsView: View {
-    @Environment(InputModel.self) private var inputModel
+    let speedFormated: String
+    let gamepadInput: GamepadInput
     
     var body: some View {
-        @Bindable var gamepadInput: GamepadInput = inputModel.gamepadInput
-        
         VStack {
-            
             // Inform that no gamepad in connected
             if gamepadInput.state == .noGamepadConnected {
                 InfoGroupBox(
@@ -174,7 +186,7 @@ private struct GamepadOptionsView: View {
                         VStack(alignment: .leading, spacing: 4.0) {
                             HStack {
                                 Image(systemName: "rt.button.roundedtop.horizontal.fill")
-                                Text("Speed (\(inputModel.speedFormated))")
+                                Text("Speed (\(speedFormated))")
                             }
                             HStack {
                                 Image(systemName: "x.circle").padding(.horizontal, 2.0)

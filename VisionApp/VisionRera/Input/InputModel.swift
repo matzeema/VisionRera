@@ -36,7 +36,7 @@ class InputModel {
     let handGestureInput = HandGestureInput()
     let gamepadInput = GamepadInput()
     
-    enum Method {
+    enum Method: String, CaseIterable {
         case handGesture
         case gamepad
     }
