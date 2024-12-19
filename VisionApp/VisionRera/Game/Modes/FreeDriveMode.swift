@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 @Observable
-class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
-    var speedToRaceTrackState: SpeedToRacetrackState = .stop
+class FreeDriveMode: GameModeProtocol, LapSessionProtocol {
+    var speedToRaceTrack: Float = 0
     var lapSessionFeature: LapSessionFeature = LapSessionFeature()
     
     private var onLapFinishedSubscription: AnyCancellable?
@@ -19,5 +19,11 @@ class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtoco
         onLapFinishedSubscription = lapSessionFeature.onLapFinishedPublisher.sink { lap in
             print(lap)
         }
+        
+        lapSessionFeature.enabled = true
+    }
+    
+    func onSpeedInputChanged(speed: Float) {
+        speedToRaceTrack = speed
     }
 }

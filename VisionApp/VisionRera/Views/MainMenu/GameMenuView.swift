@@ -13,10 +13,16 @@ struct GameMenuView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16.0) {
+                // TODO: Inform user about possible issues with Input or RaceTrack Detection
+                // TODO: Don't allow starting a GameMode if any of the issues from above is active
+                
                 ForEach(GameModel.Mode.allCases, id: \.rawValue) { mode in
                     GameItemView(
                         name: mode.metadata.name,
-                        description: mode.metadata.description
+                        description: mode.metadata.description,
+                        startGameAction: {
+                            gameModel.mode = mode
+                        }
                     )
                 }
             }
@@ -28,6 +34,7 @@ struct GameMenuView: View {
 private struct GameItemView: View {
     let name: String
     let description: String
+    let startGameAction: () -> Void
     
     var body: some View {
         GroupBox {
@@ -41,9 +48,10 @@ private struct GameItemView: View {
                 
                 Spacer()
 
-                Button(action: {}, label: {
-                    Text("Start")
-                })
+                Button(
+                    action: startGameAction,
+                    label: { Text("Start") }
+                )
             }
             .padding(8.0)
             .frame(width: 500, alignment: .leading)

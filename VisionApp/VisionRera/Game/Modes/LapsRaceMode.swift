@@ -9,6 +9,10 @@ import Foundation
 
 @Observable
 class LapsRaceMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
-    var speedToRaceTrackState: SpeedToRacetrackState = .stop
+    var speedToRaceTrack: Float = 0
     var lapSessionFeature: LapSessionFeature = LapSessionFeature()
+    
+    func onSpeedInputChanged(speed: Float) {
+        
+    }
 }
