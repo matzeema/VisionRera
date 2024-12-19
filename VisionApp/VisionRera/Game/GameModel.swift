@@ -43,6 +43,9 @@ class GameModel {
 }
 
 /// Gives metadata about the GameModes like the name and description of the mode.
+///
+/// The Metadata ist not integrated into the GameMode-Handler because these classes
+/// only exist while a GameMode is played at the moment.
 extension GameModel.Mode {
     struct Metadata {
         let name: String
