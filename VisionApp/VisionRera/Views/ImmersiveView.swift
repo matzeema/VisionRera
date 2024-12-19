@@ -62,6 +62,9 @@ struct ImmersiveView: View {
         .onChange(of: gameModel.gameModeHandler?.speedToRaceTrack) {
             if let speed = $1 {
                 raceTrackModel.setSpeed(speed: speed)
+            } else {
+                // Stop the cars if GameMode was canceled.
+                raceTrackModel.setSpeed(speed: 0.0)
             }
         }
         // Inform GameModel about finishline sensor triggers if a game mode with lap session feature is selected.
