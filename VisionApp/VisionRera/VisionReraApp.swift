@@ -24,6 +24,14 @@ struct VisionReraApp: App {
                 .environment(inputModel)
                 .environment(trackDetectionModel)
                 .environment(gameModel)
+                .onAppear {
+                    // Disable window resizing from the user
+                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                        return
+                    }
+                        
+                    windowScene.requestGeometryUpdate(.Vision(resizingRestrictions: UIWindowScene.ResizingRestrictions.none))
+                }
         }
         .defaultSize(width: 600, height: 400)
 
