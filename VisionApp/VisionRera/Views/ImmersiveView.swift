@@ -54,6 +54,10 @@ struct ImmersiveView: View {
                 gameModeHandler.onSpeedInputChanged(speed: $1)
             }
         }
+        // Inform the GameModel about if input is not available anymore.
+        .onChange(of: inputModel.inputIsAvailable) {
+            gameModel.onInputAvailabilityChanged(isAvailable: $1)
+        }
         // Update the speed on the RaceTrack with the one delivered by the GameModel.
         .onChange(of: gameModel.gameModeHandler?.speedToRaceTrack) {
             if let speed = $1 {

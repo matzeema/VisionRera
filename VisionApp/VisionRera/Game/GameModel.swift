@@ -40,6 +40,10 @@ class GameModel {
     var lapSessionFeature: LapSessionProtocol? {
         gameModeHandler as? LapSessionProtocol
     }
+    
+    func onInputAvailabilityChanged(isAvailable: Bool) {
+        if !isAvailable { mode = nil }
+    }
 }
 
 /// Gives metadata about the GameModes like the name and description of the mode.
