@@ -9,19 +9,32 @@ import SwiftUI
 import RealityKit
 import ARKit
 
+private enum AttachementsIDs {
+    case speedHand
+}
+
 struct ImmersiveView: View {
     @Environment(ImmersiveModel.self) var immersiveModel
     @Environment(RaceTrackModel.self) var raceTrackModel
     @Environment(InputModel.self) var inputModel
     @Environment(TrackDetectionModel.self) var trackDetectionModel
     @Environment(GameModel.self) var gameModel
-
-
+    
+    /// Store handtracking anchor updates to show immersive AR-Elements around the hands of the user.
+    @State var handTrackingAnchor: AnchorUpdate<HandAnchor>?
+    
     var body: some View {
-        RealityView { content in
+        RealityView { content, attachments in
+            // Attachements
+            if let speedHandAttachement = attachments.entity(for: AttachementsIDs.speedHand) {
+                content.add(speedHandAttachement)
+            }
+        } update: { content, attachements in
             
-        } update: { content in
-            
+        } attachments: {
+            Attachment(id: AttachementsIDs.speedHand) {
+                Text(inputModel.speedFormated)
+            }
         }
         // Send handtracking data to InputModel if a handtracking input method is selected.
         .onChange(of: inputModel.inputRequiresHandtrackingData, initial: true) {
@@ -30,6 +43,7 @@ struct ImmersiveView: View {
             if let handtrackingHandler = inputModel.handtrackingHandler {
                 Task {
                     for await update in immersiveModel.handTracking.anchorUpdates {
+                        handTrackingAnchor = update
                         handtrackingHandler.update(from: update)
                     }
                 }
