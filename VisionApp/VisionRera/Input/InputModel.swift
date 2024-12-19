@@ -40,6 +40,7 @@ class InputModel {
         case handGesture
         case gamepad
     }
+    
     var method: Method = .handGesture
     
     var inputHandler: any InputProtocol {
@@ -81,6 +82,22 @@ extension InputModel {
     var speedFormated: String {
         return "\(String(format: "%.0f", inputHandler.speed * 100))%"
     }
+}
+
+/// Gives metadata about the InputModes like the name and system image of the method.
+extension InputModel.Method {
+    struct Metadata {
+        let name: String
+        let systemImage: String
+    }
+    
+    var metadata: Metadata {
+        switch self {
+        case .handGesture: return Metadata(name: "Handgesture", systemImage: "hand.wave.fill")
+        case .gamepad:  return Metadata(name: "Gamecontroller", systemImage: "gamecontroller.fill")
+        }
+    }
+
 }
 
 /// Math implementations of the speed curves.

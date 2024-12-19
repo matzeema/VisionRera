@@ -53,8 +53,6 @@ struct InputMenuView: View {
 /// Item to select a input method. Uses a scale effect to show if selected or not.
 private struct InputMethodView: View {
     let inputMethod: InputModel.Method
-    let imageSystemName: String
-    let title: String
     let selected: Bool
     let selectMethod: (_ method: InputModel.Method) -> Void
     
@@ -62,15 +60,6 @@ private struct InputMethodView: View {
         self.inputMethod = inputMethod
         self.selected = selected
         self.selectMethod = selectMethod
-        
-        switch inputMethod {
-        case .handGesture:
-            imageSystemName = "hand.wave.fill"
-            title = "Handgesture"
-        case .gamepad:
-            imageSystemName = "gamecontroller.fill"
-            title = "Gamecontroller"
-        }
     }
     
     func selectMethodAction() {
@@ -82,10 +71,10 @@ private struct InputMethodView: View {
     var body: some View {
         GroupBox {
             VStack {
-                Image(systemName: imageSystemName)
+                Image(systemName: inputMethod.metadata.systemImage)
                     .imageScale(.large)
                 VStack {
-                    Text(title)
+                    Text(inputMethod.metadata.name)
                         .font(.title)
                     if selected {
                         Text("SELECTED")
