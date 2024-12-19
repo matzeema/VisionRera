@@ -10,13 +10,6 @@ import SwiftUI
 struct MainMenuView: View {
     @Environment(InputModel.self) private var inputModel
     
-    private var inputMethodSystemImage: String {
-        switch inputModel.method {
-        case .handGesture: "hand.wave"
-        case .gamepad: "gamecontroller"
-        }
-    }
-    
     var body: some View {
         TabView {
             Tab("Start", systemImage: "play") {
@@ -29,7 +22,7 @@ struct MainMenuView: View {
                     .gradientBackground(color: .purple)
             }
                 
-            Tab("Controls", systemImage: inputMethodSystemImage) {
+            Tab("Controls", systemImage: inputModel.method.metadata.systemImage) {
                 InputMenuView()
                     .gradientBackground(color: .orange)
             }
