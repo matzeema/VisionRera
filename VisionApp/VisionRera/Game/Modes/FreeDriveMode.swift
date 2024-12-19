@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 @Observable
-class FreeDriveMode: GameModeProtocol, LapSessionProtocol, CrashDetectionProtocol {
+class FreeDriveMode: GameModeProtocol, LapSessionProtocol {
     var speedToRaceTrack: Float = 0
     var lapSessionFeature: LapSessionFeature = LapSessionFeature()
     
