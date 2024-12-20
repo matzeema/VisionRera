@@ -82,13 +82,16 @@ class SpeedBarometerEntityHandler {
     private func updateEntityPositionTopOfHand(entity: Entity, anchorUpdate: AnchorUpdate<HandAnchor>, chirality: HandAnchor.Chirality) {
         if anchorUpdate.anchor.chirality != chirality { return }
         
-        var anchorTransform = Transform(matrix: anchorUpdate.anchor.originFromAnchorTransform)
+        var transform = Transform(matrix: anchorUpdate.anchor.originFromAnchorTransform)
         
-        anchorTransform.translation.y += 0.12
-        anchorTransform.translation.z += 0.05
-        anchorTransform.rotation = .init(angle: 0, axis: [0, 1, 0])
+        let alignmentRotation = simd_quatf(angle: .pi / 2, axis: [0, 0, 1]) // Rotate 90° around z-axis
+        transform.rotation = transform.rotation * alignmentRotation // Apply the alignmentRotation the rotation of the hand
         
-        entity.move(to: anchorTransform, relativeTo: nil)
+        // TODO: There is an issues when turning around. These translations are relative to the origin. So if the user does not stand in the same direction as the origin orientation, those translation move around in the "wrong" way.
+        transform.translation.y += 0.1
+        transform.translation.x += 0.2
+        
+        entity.move(to: transform, relativeTo: nil)
     }
      
     private func updateEntityPositionGameControllerRelativeToHand(entity: Entity, anchorUpdate: AnchorUpdate<HandAnchor>, chirality: HandAnchor.Chirality) {
