@@ -74,7 +74,6 @@ class GamepadInput: InputProtocol {
         gamepad.rightTrigger.valueChangedHandler = {(_ button: GCControllerButtonInput, _ value: Float, _ pressed: Bool) -> Void in
             guard let strongController = weakController else { return }
             
-            print(value)
             strongController.speed = value
         }
         

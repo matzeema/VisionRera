@@ -39,6 +39,8 @@ class SpeedBarometerEntityHandler {
     /// from the RealityView and updates from the HandAnchors are ignored.
     var enabled = false {
         didSet {
+            if oldValue == enabled { return }
+            
             if enabled {
                 addBarometerToContent()
             } else {
@@ -50,7 +52,7 @@ class SpeedBarometerEntityHandler {
     private func addBarometerToContent() {
         guard let realityViewContent, let speedBarometerEntity else { return }
         realityViewContent.add(handRootEntity)
-        handRootEntity.addChild(speedBarometerEntity) // TODO: Check if the child has to be added every single time after readding the entity to the scene
+        handRootEntity.addChild(speedBarometerEntity)
         
         updateSpeedBarometerPositionRelativeToRoot()
     }
@@ -78,33 +80,16 @@ class SpeedBarometerEntityHandler {
         if enabled == false { return }
          
         // Update the position of the `rootHandEntity`.
+        var chirality: HandAnchor.Chirality?
         switch position {
-        case .topOfHand(let chirality):
-            updateRootEntityPositionTopOfHand(
-                rootEntity: handRootEntity,
-                anchorUpdate: anchorUpdate,
-                chirality: chirality
-            )
-            
-        case .gamecontrollerRelativeToHand(let chirality):
-            updateRootEntityPositionGameControllerRelativeToHand(
-                rootEntity: handRootEntity,
-                anchorUpdate: anchorUpdate,
-                chirality: chirality
-            )
+        case .topOfHand(let c): chirality = c
+        case .gamecontrollerRelativeToHand(let c): chirality = c
         }
-    }
-    
-    private func updateRootEntityPositionTopOfHand(rootEntity: Entity, anchorUpdate: AnchorUpdate<HandAnchor>, chirality: HandAnchor.Chirality) {
-        if anchorUpdate.anchor.chirality != chirality { return }
         
-        // Update position of root entity
-        let transform = Transform(matrix: anchorUpdate.anchor.originFromAnchorTransform)
-        rootEntity.move(to: transform, relativeTo: nil)
-    }
-     
-    private func updateRootEntityPositionGameControllerRelativeToHand(rootEntity: Entity, anchorUpdate: AnchorUpdate<HandAnchor>, chirality: HandAnchor.Chirality) {
-        // TODO: Implement
+        if anchorUpdate.anchor.chirality == chirality {
+            let transform = Transform(matrix: anchorUpdate.anchor.originFromAnchorTransform)
+            handRootEntity.move(to: transform, relativeTo: nil)
+        }
     }
     
     /// Updates the position of the `speedBarometerEntity` relative to the `handRootEntity`.
@@ -120,9 +105,7 @@ class SpeedBarometerEntityHandler {
     }
     
     private func updateSpeedBarometerPositionRelativeToRootTopOfHand(chirality: HandAnchor.Chirality) {
-        let chiralityMultiplier: Float = (chirality == .left ? -1 : 1)
-        
-        // TODO: Optimize position for left chirality
+        let chiralityMultiplier: Float = (chirality == .left ? -1 : 1) // TODO: Optimize position for left chirality
         
         let transform = Transform(
             rotation: simd_quatf(angle: .pi / 2, axis: [0, 0, 1]) * simd_quatf(angle: .pi / 4, axis: [1, 0, 0]) * chiralityMultiplier,
@@ -133,6 +116,15 @@ class SpeedBarometerEntityHandler {
     }
     
     private func updateSpeedBarometerPositionRelativeToRootGamecontroller(chirality: HandAnchor.Chirality) {
-        // TODO: Implement
+        // TODO: Add support for left chirality
+        
+        let transform = Transform(
+            rotation:   simd_quatf(angle: .pi / 2, axis: [0, 0, 1]) *
+                        simd_quatf(angle: .pi / 4, axis: [1, 0, 0]) *
+                        simd_quatf(angle: -(.pi / 8), axis: [0, 1, 0]),
+            translation: [-0.18, -0.08, 0.08]
+        )
+        
+        speedBarometerEntity?.move(to: transform, relativeTo: handRootEntity)
     }
 }
