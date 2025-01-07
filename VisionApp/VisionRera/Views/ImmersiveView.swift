@@ -58,16 +58,14 @@ struct ImmersiveView: View {
         // Makes sure content is shown on top of the hands.
         .upperLimbVisibility(.hidden)
         
-        // Send handtracking data to InputModel if a handtracking input method is selected.
-        .onChange(of: inputModel.inputRequiresHandtrackingData, initial: true) {
-            immersiveModel.enableHandTracking = inputModel.inputRequiresHandtrackingData
-            
-            if let handtrackingHandler = inputModel.handtrackingHandler {
-                Task {
-                    for await update in immersiveModel.handTracking.anchorUpdates {
-                        speedBarometerEntityHandler.updateWithAnchor(anchorUpdate: update)
-                        handtrackingHandler.update(from: update)
-                    }
+        // Inform SpeedBarometer and InputModel about Handtracking changes.
+        .task {
+            for await update in immersiveModel.handTracking.anchorUpdates {
+                speedBarometerEntityHandler.updateWithAnchor(anchorUpdate: update)
+                
+                // Send handtracking data to InputModel if a handtracking input method is selected.
+                if let handtrackingHandler = inputModel.handtrackingHandler {
+                    handtrackingHandler.update(from: update)
                 }
             }
         }
