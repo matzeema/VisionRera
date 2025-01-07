@@ -34,7 +34,7 @@ class ImmersiveModel {
     var handTracking = HandTrackingProvider()
     var handTrackingAuthStatus: ARKitSession.AuthorizationStatus = .notDetermined
     
-    var enableHandTracking = false {
+    var enableHandTracking = true {
         didSet {
             Task { await runARKitSession() }
         }

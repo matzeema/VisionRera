@@ -21,31 +21,51 @@ struct ImmersiveView: View {
     @Environment(GameModel.self) var gameModel
     
     /// Store handtracking anchor updates to show immersive AR-Elements around the hands of the user.
-    @State var handTrackingAnchor: AnchorUpdate<HandAnchor>?
+    var speedBarometerEntityHandler = SpeedBarometerEntityHandler()
     
     var body: some View {
         RealityView { content, attachments in
+            speedBarometerEntityHandler.realityViewContent = content
+            
             // Attachements
-            if let speedHandAttachement = attachments.entity(for: AttachementsIDs.speedHand) {
-                content.add(speedHandAttachement)
+            if let attachement = attachments.entity(for: AttachementsIDs.speedHand) {
+                speedBarometerEntityHandler.speedBarometerEntity = attachement
             }
+            
         } update: { content, attachements in
+            
+            // Speed Barometer
+            if gameModel.mode == nil {
+                speedBarometerEntityHandler.enabled = false
+                
+            } else {
+                // Set the position of the Speed Barometer based in the input method
+                switch inputModel.method {
+                case .handGesture:
+                    speedBarometerEntityHandler.position = .topOfHand(chirality: inputModel.handGestureInput.chirality)
+                case .gamepad:
+                    speedBarometerEntityHandler.position = .gamecontrollerRelativeToHand(chirality: .right)
+                }
+                
+                speedBarometerEntityHandler.enabled = true
+            }
             
         } attachments: {
             Attachment(id: AttachementsIDs.speedHand) {
-                Text(inputModel.speedFormated)
+                SpeedBarometerView(speed: inputModel.speed, speedFormated: inputModel.speedFormated)
             }
         }
-        // Send handtracking data to InputModel if a handtracking input method is selected.
-        .onChange(of: inputModel.inputRequiresHandtrackingData, initial: true) {
-            immersiveModel.enableHandTracking = inputModel.inputRequiresHandtrackingData
-            
-            if let handtrackingHandler = inputModel.handtrackingHandler {
-                Task {
-                    for await update in immersiveModel.handTracking.anchorUpdates {
-                        handTrackingAnchor = update
-                        handtrackingHandler.update(from: update)
-                    }
+        // Makes sure content is shown on top of the hands.
+        .upperLimbVisibility(.hidden)
+        
+        // Inform SpeedBarometer and InputModel about Handtracking changes.
+        .task {
+            for await update in immersiveModel.handTracking.anchorUpdates {
+                speedBarometerEntityHandler.updateWithAnchor(anchorUpdate: update)
+                
+                // Send handtracking data to InputModel if a handtracking input method is selected.
+                if let handtrackingHandler = inputModel.handtrackingHandler {
+                    handtrackingHandler.update(from: update)
                 }
             }
         }
