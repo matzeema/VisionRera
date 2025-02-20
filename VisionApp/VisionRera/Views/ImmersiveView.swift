@@ -52,7 +52,7 @@ struct ImmersiveView: View {
             
         } attachments: {
             Attachment(id: AttachementsIDs.speedHand) {
-                SpeedBarometerView(speed: inputModel.speed, speedFormated: inputModel.speedFormated)
+                SpeedBarometerView(speed: inputModel.speed)
             }
         }
         // Makes sure content is shown on top of the hands.
@@ -108,9 +108,4 @@ struct ImmersiveView: View {
             }
         }
     }
-}
-
-#Preview(immersionStyle: .mixed) {
-    ImmersiveView()
-        .environment(ImmersiveModel())
 }

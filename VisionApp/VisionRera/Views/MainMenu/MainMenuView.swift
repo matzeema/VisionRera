@@ -38,4 +38,5 @@ struct MainMenuView: View {
         .environment(ImmersiveModel())
         .environment(RaceTrackModel())
         .environment(InputModel())
+        .environment(GameModel())
 }

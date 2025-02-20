@@ -43,4 +43,5 @@ struct ContentView: View {
     ContentView()
         .environment(ImmersiveModel())
         .environment(RaceTrackModel())
+        .environment(GameModel())
 }

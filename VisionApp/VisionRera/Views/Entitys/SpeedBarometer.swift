@@ -14,14 +14,29 @@ import ARKit
 /// with a Text at the bottom to show the speed in percentage.
 struct SpeedBarometerView: View {
     let speed: Float
-    let speedFormated: String
+    
+    private var speedFormated: String {
+        String(format: "%.0f", speed * 100)
+    }
     
     var body: some View {
-        Gauge(value: speed) {
+        Gauge(value: speed, in: 0.0...1.0) {
+            Text("Speed")
+        } currentValueLabel: {
             Text(speedFormated)
+        } minimumValueLabel: {
+            Text("0")
+                .foregroundStyle(.tertiary)
+        } maximumValueLabel: {
+            Text("100")
+                .foregroundStyle(.tertiary)
         }
         .gaugeStyle(.accessoryCircular)
     }
+}
+
+#Preview(windowStyle: .plain) {    
+    SpeedBarometerView(speed: 0.8)
 }
 
 /// Manages the position and placement of the `SpeedBarometerView` as a RealityView-Attachement.
