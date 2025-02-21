@@ -20,6 +20,8 @@
 		E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A92CB7E3C200F744AB /* Assets.xcassets */; };
 		E14871F92D148B4000FE494C /* InputSpeedCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14871F82D148B3B00FE494C /* InputSpeedCurve.swift */; };
 		E14871FB2D15B60100FE494C /* SpeedBarometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14871FA2D15B60100FE494C /* SpeedBarometer.swift */; };
+		E187B24D2D6786F3004EBD51 /* RaceInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187B24C2D6786EA004EBD51 /* RaceInfos.swift */; };
+		E187B2552D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E187B2542D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 */; };
 		E19B1D8F2CCA9FEF001326CA /* RaceTrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D8E2CCA9FEB001326CA /* RaceTrackModel.swift */; };
 		E19B1D942CCAB9AC001326CA /* RaceTrackCBUuids.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */; };
 		E19B1D962CCAED1B001326CA /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19B1D952CCAED17001326CA /* LaunchView.swift */; };
@@ -51,6 +53,8 @@
 		E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionReraApp.swift; sourceTree = "<group>"; };
 		E14871F82D148B3B00FE494C /* InputSpeedCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSpeedCurve.swift; sourceTree = "<group>"; };
 		E14871FA2D15B60100FE494C /* SpeedBarometer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedBarometer.swift; sourceTree = "<group>"; };
+		E187B24C2D6786EA004EBD51 /* RaceInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceInfos.swift; sourceTree = "<group>"; };
+		E187B2542D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SoundEffect_NewFastestLap.mp3; sourceTree = "<group>"; };
 		E19B1D8E2CCA9FEB001326CA /* RaceTrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackModel.swift; sourceTree = "<group>"; };
 		E19B1D932CCAB9A7001326CA /* RaceTrackCBUuids.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTrackCBUuids.swift; sourceTree = "<group>"; };
 		E19B1D952CCAED17001326CA /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				E1CD1DCC2CDABA790052BDBE /* Game */,
 				E146E0AC2CB7E3C200F744AB /* Info.plist */,
 				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
+				E187B2532D68B72B004EBD51 /* AudioAssets */,
 				E146E0A72CB7E3C200F744AB /* Preview Content */,
 			);
 			path = VisionRera;
@@ -140,8 +145,17 @@
 			isa = PBXGroup;
 			children = (
 				E14871FA2D15B60100FE494C /* SpeedBarometer.swift */,
+				E187B24C2D6786EA004EBD51 /* RaceInfos.swift */,
 			);
 			path = Entitys;
+			sourceTree = "<group>";
+		};
+		E187B2532D68B72B004EBD51 /* AudioAssets */ = {
+			isa = PBXGroup;
+			children = (
+				E187B2542D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 */,
+			);
+			path = AudioAssets;
 			sourceTree = "<group>";
 		};
 		E19B1D902CCAB038001326CA /* RaceTrack */ = {
@@ -309,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */,
+				E187B2552D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 in Resources */,
 				E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E187B24D2D6786F3004EBD51 /* RaceInfos.swift in Sources */,
 				E19B1D8F2CCA9FEF001326CA /* RaceTrackModel.swift in Sources */,
 				E14871FB2D15B60100FE494C /* SpeedBarometer.swift in Sources */,
 				E146E0B02CB7E3C200F744AB /* ImmersiveModel.swift in Sources */,
