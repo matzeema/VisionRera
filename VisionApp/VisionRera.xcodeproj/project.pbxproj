@@ -16,7 +16,6 @@
 		E146E0B12CB7E3C200F744AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AA2CB7E3C200F744AB /* ContentView.swift */; };
 		E146E0B22CB7E3C200F744AB /* ImmersiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AB2CB7E3C200F744AB /* ImmersiveView.swift */; };
 		E146E0B42CB7E3C200F744AB /* VisionReraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146E0AE2CB7E3C200F744AB /* VisionReraApp.swift */; };
-		E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */; };
 		E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E146E0A92CB7E3C200F744AB /* Assets.xcassets */; };
 		E14871F92D148B4000FE494C /* InputSpeedCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14871F82D148B3B00FE494C /* InputSpeedCurve.swift */; };
 		E14871FB2D15B60100FE494C /* SpeedBarometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14871FA2D15B60100FE494C /* SpeedBarometer.swift */; };
@@ -44,7 +43,6 @@
 		E13C29562D145925000933AC /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		E13C29582D14594B000933AC /* InfoGroupBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoGroupBox.swift; sourceTree = "<group>"; };
 		E146E0782CB6E69600F744AB /* VisionRera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionRera.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E146E0A82CB7E3C200F744AB /* ImmersiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmersiveModel.swift; sourceTree = "<group>"; };
 		E146E0A92CB7E3C200F744AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E146E0AA2CB7E3C200F744AB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,14 +104,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E146E0A72CB7E3C200F744AB /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				E146E0A62CB7E3C200F744AB /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		E146E0AF2CB7E3C200F744AB /* VisionRera */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,7 +117,6 @@
 				E146E0AC2CB7E3C200F744AB /* Info.plist */,
 				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
 				E187B2532D68B72B004EBD51 /* AudioAssets */,
-				E146E0A72CB7E3C200F744AB /* Preview Content */,
 			);
 			path = VisionRera;
 			sourceTree = "<group>";
@@ -322,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */,
 				E187B2552D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 in Resources */,
 				E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */,
 			);
