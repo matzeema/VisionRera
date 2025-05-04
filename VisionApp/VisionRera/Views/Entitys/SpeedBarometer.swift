@@ -122,11 +122,13 @@ class SpeedBarometerEntityHandler {
     private func updateSpeedBarometerPositionRelativeToRootTopOfHand(chirality: HandAnchor.Chirality) {
         let chiralityMultiplier: Float = (chirality == .left ? -1 : 1) // TODO: Optimize position for left chirality
         
-        let transform = Transform(
-            rotation: simd_quatf(angle: .pi / 2, axis: [0, 0, 1]) * simd_quatf(angle: .pi / 4, axis: [1, 0, 0]) * chiralityMultiplier,
-            translation: [-0.18, -0.03, 0.08] * chiralityMultiplier
-        )
+        let rotation =  simd_quatf(angle: .pi / 2, axis: [0, 0, 1]) *
+                        simd_quatf(angle: .pi / 4, axis: [1, 0, 0]) *
+                        chiralityMultiplier
         
+        let translation: SIMD3<Float> = [-0.18, -0.03, 0.08] * chiralityMultiplier
+        
+        let transform = Transform(rotation: rotation, translation: translation)
         speedBarometerEntity?.move(to: transform, relativeTo: handRootEntity)
     }
     
