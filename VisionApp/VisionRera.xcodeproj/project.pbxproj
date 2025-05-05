@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1176FD42DC8FBBA0061BBEE /* Enterprise.license in Resources */ = {isa = PBXBuildFile; fileRef = E1176FD32DC8FBBA0061BBEE /* Enterprise.license */; };
 		E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426D2CEF242800F6D047 /* MainMenuView.swift */; };
 		E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426F2CEF24C000F6D047 /* GameMenuView.swift */; };
 		E12942722CEF286A00F6D047 /* InputMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12942712CEF286A00F6D047 /* InputMenuView.swift */; };
@@ -38,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1176FD22DC8E6A60061BBEE /* VisionRera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisionRera.entitlements; sourceTree = "<group>"; };
+		E1176FD32DC8FBBA0061BBEE /* Enterprise.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = Enterprise.license; sourceTree = "<group>"; };
 		E129426D2CEF242800F6D047 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		E129426F2CEF24C000F6D047 /* GameMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMenuView.swift; sourceTree = "<group>"; };
 		E12942712CEF286A00F6D047 /* InputMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMenuView.swift; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				E1CD1DCF2CDABACC0052BDBE /* TrackDetection */,
 				E1CD1DCC2CDABA790052BDBE /* Game */,
 				E146E0AC2CB7E3C200F744AB /* Info.plist */,
+				E1176FD32DC8FBBA0061BBEE /* Enterprise.license */,
+				E1176FD22DC8E6A60061BBEE /* VisionRera.entitlements */,
 				E146E0A92CB7E3C200F744AB /* Assets.xcassets */,
 				E187B2532D68B72B004EBD51 /* AudioAssets */,
 				E146E0A72CB7E3C200F744AB /* Preview Content */,
@@ -322,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1176FD42DC8FBBA0061BBEE /* Enterprise.license in Resources */,
 				E146E0B52CB7E3C200F744AB /* Preview Assets.xcassets in Resources */,
 				E187B2552D68B759004EBD51 /* SoundEffect_NewFastestLap.mp3 in Resources */,
 				E146E0B62CB7E3C200F744AB /* Assets.xcassets in Resources */,
@@ -371,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VisionRera/VisionRera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VisionRera/Preview Content\"";
@@ -398,6 +405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = VisionRera/VisionRera.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VisionRera/Preview Content\"";
