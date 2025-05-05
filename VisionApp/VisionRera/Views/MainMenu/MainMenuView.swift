@@ -18,7 +18,7 @@ struct MainMenuView: View {
             }
             
             Tab("Racetrack", systemImage: "car.rear.road.lane") {
-                Text("Racetrack")
+                TrackMenuView()
                     .gradientBackground(color: .purple)
             }
                 

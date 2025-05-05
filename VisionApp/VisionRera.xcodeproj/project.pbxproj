@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1176FD12DC8E52A0061BBEE /* TrackMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1176FD02DC8E5170061BBEE /* TrackMenuView.swift */; };
 		E1176FD42DC8FBBA0061BBEE /* Enterprise.license in Resources */ = {isa = PBXBuildFile; fileRef = E1176FD32DC8FBBA0061BBEE /* Enterprise.license */; };
 		E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426D2CEF242800F6D047 /* MainMenuView.swift */; };
 		E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E129426F2CEF24C000F6D047 /* GameMenuView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1176FD02DC8E5170061BBEE /* TrackMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMenuView.swift; sourceTree = "<group>"; };
 		E1176FD22DC8E6A60061BBEE /* VisionRera.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisionRera.entitlements; sourceTree = "<group>"; };
 		E1176FD32DC8FBBA0061BBEE /* Enterprise.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = Enterprise.license; sourceTree = "<group>"; };
 		E129426D2CEF242800F6D047 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				E129426D2CEF242800F6D047 /* MainMenuView.swift */,
 				E129426F2CEF24C000F6D047 /* GameMenuView.swift */,
+				E1176FD02DC8E5170061BBEE /* TrackMenuView.swift */,
 				E12942712CEF286A00F6D047 /* InputMenuView.swift */,
 			);
 			path = MainMenu;
@@ -342,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E187B24D2D6786F3004EBD51 /* RaceInfos.swift in Sources */,
+				E1176FD12DC8E52A0061BBEE /* TrackMenuView.swift in Sources */,
 				E19B1D8F2CCA9FEF001326CA /* RaceTrackModel.swift in Sources */,
 				E14871FB2D15B60100FE494C /* SpeedBarometer.swift in Sources */,
 				E146E0B02CB7E3C200F744AB /* ImmersiveModel.swift in Sources */,
