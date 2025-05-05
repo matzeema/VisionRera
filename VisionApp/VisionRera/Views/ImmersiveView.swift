@@ -69,6 +69,12 @@ struct ImmersiveView: View {
                 }
             }
         }
+        // Inform TrackDetectionModel about barcode updates.
+        .task {
+            for await update in immersiveModel.barcodeDetection.anchorUpdates {
+                trackDetectionModel.getBarcodeUpdate(update: update)
+            }
+        }
         // Inform InputModel about data provider changes if a handtracking input method is selected.
         .onChange(of: immersiveModel.handTracking.state) {
             if let handtrackingHandler = inputModel.handtrackingHandler {
@@ -106,6 +112,10 @@ struct ImmersiveView: View {
             if let mode = gameModel.lapSessionFeature {
                 mode.lapSessionFeature.carDroveOverFinishline($1)
             }
+        }
+        // Enable barcode detection if track detection is active.
+        .onChange(of: trackDetectionModel.isDetecting) {
+            immersiveModel.enableBarcodeDetection = $1
         }
     }
 }

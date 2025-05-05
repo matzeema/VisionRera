@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSWorldSensingUsageDescription</key>
+	<string>Required to find the position of the Track.</string>
 	<key>NSHandsTrackingUsageDescription</key>
-	<string>Handtracking is required to control the speed of the cars.</string>
+	<string>Required to control the speed of the cars.</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Bluetooth is required to connect to the RaceTrack.</string>
 	<key>UIApplicationSceneManifest</key>

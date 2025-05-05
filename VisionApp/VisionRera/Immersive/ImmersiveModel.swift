@@ -30,11 +30,18 @@ class ImmersiveModel {
     
     /// The ARKitSession of the app.
     let arKitSession = ARKitSession()
+    var worldSensingAuthStatus = ARKitSession.AuthorizationStatus.notDetermined
+    var handTrackingAuthStatus = ARKitSession.AuthorizationStatus.notDetermined
     
     var handTracking = HandTrackingProvider()
-    var handTrackingAuthStatus: ARKitSession.AuthorizationStatus = .notDetermined
-    
     var enableHandTracking = true {
+        didSet {
+            Task { await runARKitSession() }
+        }
+    }
+    
+    var barcodeDetection = BarcodeDetectionProvider(symbologies: [.qr])
+    var enableBarcodeDetection = false {
         didSet {
             Task { await runARKitSession() }
         }
@@ -55,6 +62,17 @@ class ImmersiveModel {
             dataProviders.append(handTracking)
         }
         
+        // Barcode detection
+        if BarcodeDetectionProvider.isSupported {
+            if barcodeDetection.state == .stopped && enableBarcodeDetection {
+                // It is not possible to re-run a stopped data provider.
+                // -> Create a new BarcodeDetectionProvider instance
+                barcodeDetection = BarcodeDetectionProvider(symbologies: [.qr])
+            }
+            
+            dataProviders.append(barcodeDetection)
+        }
+        
         do {
             try await arKitSession.run(dataProviders)
             
@@ -62,8 +80,10 @@ class ImmersiveModel {
             for await event in arKitSession.events {
                 switch event {
                 case .authorizationChanged(type: let type, status: let status):
-                    if type == .handTracking {
-                        handTrackingAuthStatus = status
+                    switch type {
+                    case .worldSensing: worldSensingAuthStatus = status
+                    case .handTracking: handTrackingAuthStatus = status
+                    default: break
                     }
                 default: break
                 }
