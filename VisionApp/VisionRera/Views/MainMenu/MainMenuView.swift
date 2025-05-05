@@ -39,4 +39,5 @@ struct MainMenuView: View {
         .environment(RaceTrackModel())
         .environment(InputModel())
         .environment(GameModel())
+        .environment(TrackDetectionModel())
 }
