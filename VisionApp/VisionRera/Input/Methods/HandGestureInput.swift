@@ -41,7 +41,9 @@ class HandGestureInput: HandtrackingInputProtocol {
     
     private func calculateSpeedFromThumbTip(joint: HandSkeleton.Joint) -> Float {
         let transform = Transform(matrix: joint.anchorFromJointTransform)
-        let translationZ = transform.translation.z
+        
+        // Invert Z translation for left hand to support both chiralities
+        let translationZ: Float = (chirality == .right) ? transform.translation.z : -transform.translation.z
         
         var speedResult = 1 - (((translationZ - 0.04) * 1.6666666) * 10)
         
