@@ -16,7 +16,7 @@ struct TrackMenuView: View {
         VStack(spacing: 20) {
             
             // Track detected view
-            if let track = trackDetection.track {
+            if let track = trackDetection.trackInfo {
                 Text("Track Detected")
                     .font(.largeTitle)
                     .fontWeight(.bold)

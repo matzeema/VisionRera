@@ -43,9 +43,14 @@ class LapSessionFeature {
     /// The minimal duration a lap can take. Anything under that value gets treated as sensor issues or cheating by the user.
     static let minimalLapDuration = 500
     
+    struct LapFinishedInfo {
+        let lap: Lap
+        let fastestLap: Bool
+    }
+    
     /// Combine publisher to track changes on the current lap.
-    var onLapFinishedPublisher: AnyPublisher<Lap, Never> { onLapFinished.eraseToAnyPublisher() }
-    private let onLapFinished = PassthroughSubject<Lap, Never>()
+    var onLapFinishedPublisher: AnyPublisher<LapFinishedInfo, Never> { onLapFinished.eraseToAnyPublisher() }
+    private let onLapFinished = PassthroughSubject<LapFinishedInfo, Never>()
     
     /// Enables or disables the measurement of labs.
     var enabled = false {
@@ -73,6 +78,11 @@ class LapSessionFeature {
         return duration
     }
     
+    /// The duration of the fastest lap.
+    var fastestLapDuration: UInt32? {
+        laps.compactMap { $0.durationInMillis }.min()
+    }
+    
     init(slot: RaceTrackSlot = RaceTrackSlot.defaultSlot) {
         self.slot = slot
     }
@@ -92,7 +102,11 @@ class LapSessionFeature {
             }
             
             laps.append(currentLap)
-            onLapFinished.send(currentLap)
+            
+            // Inform about finished lap via publisher
+            let currentLapIsFastest = (fastestLapDuration == currentLap.durationInMillis)
+            let info = LapFinishedInfo(lap: currentLap, fastestLap: currentLapIsFastest)
+            onLapFinished.send(info)
         }
         
         // Instantly start a new lap after one finished

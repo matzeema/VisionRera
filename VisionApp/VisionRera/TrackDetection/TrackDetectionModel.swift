@@ -18,11 +18,11 @@ class TrackDetectionModel {
     /// Indicates whether the barcode detection process is currently active.
     var isDetecting = false
 
-    struct Track {
+    struct TrackInfo {
         let marker: TrackMarker
         let transform: Transform
     }
-    private(set) var track: Track?
+    var trackInfo: TrackInfo? = nil
     
     func getBarcodeUpdate(update: AnchorUpdate<BarcodeAnchor>) {
         if isDetecting == false { return }
@@ -31,7 +31,7 @@ class TrackDetectionModel {
         guard let payloadString = update.anchor.payloadString?.data(using: .utf8) else { return }
         guard let trackMarker = createTrackMarker(payload: payloadString) else { return }
         
-        track = Track(
+        trackInfo = TrackInfo(
             marker: trackMarker,
             transform: Transform(matrix: update.anchor.originFromAnchorTransform)
         )
