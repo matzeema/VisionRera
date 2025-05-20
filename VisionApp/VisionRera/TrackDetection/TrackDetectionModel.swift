@@ -22,7 +22,7 @@ class TrackDetectionModel {
         let marker: TrackMarker
         let transform: Transform
     }
-    var track: Track?
+    private(set) var track: Track?
     
     func getBarcodeUpdate(update: AnchorUpdate<BarcodeAnchor>) {
         if isDetecting == false { return }
