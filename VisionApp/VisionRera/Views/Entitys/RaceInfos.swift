@@ -40,7 +40,12 @@ class RaceInfosEntityHandler {
         guard let mainEntity else { return }
         
         mainEntity.position = transform.translation
-        mainEntity.transform.rotation = transform.rotation
+        
+        // Convert to Rotation3D to easier remove rotation around x and z axis.
+        var rotation = Rotation3D(transform.rotation)
+        rotation.axis.x = 0
+        rotation.axis.z = 0
+        mainEntity.transform.rotation = simd_quatf(rotation)
     }
     
     /// Removes all race infos. You have to call `setRaceInfosTransform` before requesting race infos again.
@@ -64,6 +69,9 @@ class RaceInfosEntityHandler {
             currentInfo = .fastestLap(lap)
             
             let fastestEntity = fastestLapEntityHandler.createFastestLapEntity(lap: lap)
+            let fastestLapWidth = fastestEntity.visualBounds(relativeTo: nil).extents.x
+            
+            fastestEntity.position = [ -(fastestLapWidth / 2), 0.2, 0 ]
             mainEntity.addChild(fastestEntity)
             
             // After 1.5 seconds remove the entity and reset currentInfo
