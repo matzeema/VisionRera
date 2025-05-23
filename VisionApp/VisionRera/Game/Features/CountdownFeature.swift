@@ -12,6 +12,7 @@ protocol CountdownProtocol {
     var countdownFeature: CountdownFeature { get set }
 }
 
+@Observable
 class CountdownFeature {
     static let defaultStartValue = 3
     static let defaultTimerInterval = 1.0
