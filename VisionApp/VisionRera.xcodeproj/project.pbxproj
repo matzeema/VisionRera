@@ -36,6 +36,8 @@
 		E1CD1DD12CDABAE10052BDBE /* TrackDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */; };
 		E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */; };
 		E1CD1DD62CDAD3DD0052BDBE /* GamepadInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */; };
+		E1D51AD02DE0A7550032C90B /* CarAtStartlineFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D51ACF2DE0A7490032C90B /* CarAtStartlineFeature.swift */; };
+		E1D51AD22DE0B7990032C90B /* CountdownFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D51AD12DE0B7940032C90B /* CountdownFeature.swift */; };
 		E1F4F5E22CF9E1B5000BBD00 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F4F5E12CF9E08B000BBD00 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		E1CD1DD02CDABADC0052BDBE /* TrackDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetectionModel.swift; sourceTree = "<group>"; };
 		E1CD1DD32CDAD3AF0052BDBE /* HandGestureInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandGestureInput.swift; sourceTree = "<group>"; };
 		E1CD1DD52CDAD3D90052BDBE /* GamepadInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamepadInput.swift; sourceTree = "<group>"; };
+		E1D51ACF2DE0A7490032C90B /* CarAtStartlineFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAtStartlineFeature.swift; sourceTree = "<group>"; };
+		E1D51AD12DE0B7940032C90B /* CountdownFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownFeature.swift; sourceTree = "<group>"; };
 		E1F4F5E12CF9E08B000BBD00 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,6 +222,8 @@
 			children = (
 				E1A6F9572CF77F990035412E /* LapSessionFeature.swift */,
 				E1A6F9592CF7805B0035412E /* CrashDetectionFeature.swift */,
+				E1D51ACF2DE0A7490032C90B /* CarAtStartlineFeature.swift */,
+				E1D51AD12DE0B7940032C90B /* CountdownFeature.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -365,6 +371,8 @@
 				E129426E2CEF244300F6D047 /* MainMenuView.swift in Sources */,
 				E1F4F5E22CF9E1B5000BBD00 /* GameView.swift in Sources */,
 				E1CD1DD42CDAD3D10052BDBE /* HandGestureInput.swift in Sources */,
+				E1D51AD02DE0A7550032C90B /* CarAtStartlineFeature.swift in Sources */,
+				E1D51AD22DE0B7990032C90B /* CountdownFeature.swift in Sources */,
 				E12942702CEF24C000F6D047 /* GameMenuView.swift in Sources */,
 				E1A6F9542CF77F760035412E /* LapsRaceMode.swift in Sources */,
 				E19B1D962CCAED1B001326CA /* LaunchView.swift in Sources */,
