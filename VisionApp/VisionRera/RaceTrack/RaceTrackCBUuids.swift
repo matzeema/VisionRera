@@ -25,7 +25,7 @@ struct RaceTrackCBUuids {
     
     // CarOnTrack detection service
     static let carOnTrackServiceUuid = CBUUID(string: "0x3840")
-    static let carOnTrackStateAUuid  = CBUUID(string: "0x3841")
-    static let carOnTrackStateBUuid  = CBUUID(string: "0x3842")
+    static let carOnTrackStateAUuid  = CBUUID(string: "0x3842")
+    static let carOnTrackStateBUuid  = CBUUID(string: "0x3841")
 }
 
