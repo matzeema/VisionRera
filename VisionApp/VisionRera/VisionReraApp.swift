@@ -48,6 +48,28 @@ struct VisionReraApp: App {
                 .onDisappear {
                     immersiveModel.immersiveSpaceState = .closed
                 }
+            // Update the speed on the RaceTrack with the one delivered by the GameModel.
+            .onChange(of: gameModel.gameModeHandler?.speedToRaceTrack) {
+                if let speed = $1 {
+                    raceTrackModel.setSpeed(speed: speed)
+                } else {
+                    // Stop the cars if GameMode was canceled.
+                    raceTrackModel.setSpeed(speed: 0.0)
+                }
+            }
+            // Inform GameModel about finishline sensor triggers if a game mode with lap session feature is selected.
+            .onChange(of: raceTrackModel.getLastTriggerFinishlineSensor() ?? 0) {
+                if let mode = gameModel.lapSessionFeature {
+                    mode.lapSessionFeature.carDroveOverFinishline($1)
+                }
+            }
+            // Inform GameModel about car-on-track state changes.
+            .onChange(of: raceTrackModel.getCarOnTrackState()) {
+                if let crashDetection = gameModel.crashDetectionFeature,
+                   let state = $1 {
+                    crashDetection.crashDetectionFeature.onCarOnTrackStateChanged(state: state)
+                }
+            }
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)
      }

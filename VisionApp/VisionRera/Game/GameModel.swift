@@ -41,6 +41,10 @@ class GameModel {
         gameModeHandler as? LapSessionProtocol
     }
     
+    var crashDetectionFeature: CrashDetectionProtocol? {
+        gameModeHandler as? CrashDetectionProtocol
+    }
+    
     func onInputAvailabilityChanged(isAvailable: Bool) {
         if !isAvailable { mode = nil }
     }
