@@ -95,6 +95,7 @@ class LapsRaceMode: GameModeProtocol,
             
         case .restartCountdown:
             lapSessionFeature.enabled = true
+            crashDetectionFeature.registerNewCrashes = true
             state = .racing
             
         default: break
