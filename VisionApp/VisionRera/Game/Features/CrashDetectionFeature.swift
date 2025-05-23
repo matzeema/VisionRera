@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+protocol CarOnTrackStateProtocol {
+    func onCarOnTrackStateChanged(state: CarOnTrackState)
+}
+
 protocol CrashDetectionProtocol {
     var crashDetectionFeature: CrashDetectionFeature { get set }
 }
@@ -17,19 +21,34 @@ class CrashDetectionFeature {
     
     /// Enables or disables the detection of crashes.
     var enabled = false
+    var registerNewCrashes = true
     
-    struct CrashInfo {
-        // For now the crash info is just empty.
-        // More info might be needed in the future.
+    enum CrashInfo {
+        case newCrash
+        case dissolved
+        case dissolvedCanceled
     }
     
     /// Combine publisher to track updates on the car crashes.
-    var onCarCrashedPublisher: AnyPublisher<CrashInfo, Never> { onCarCrashed.eraseToAnyPublisher() }
-    private let onCarCrashed = PassthroughSubject<CrashInfo, Never>()
+    var onCrashUpdatedPublisher: AnyPublisher<CrashInfo, Never> { onCrashUpdated.eraseToAnyPublisher() }
+    private let onCrashUpdated = PassthroughSubject<CrashInfo, Never>()
     
     func onCarOnTrackStateChanged(state: CarOnTrackState) {
-        if state == .notOnTrack {
-            onCarCrashed.send(CrashInfo())
+        if enabled == false { return }
+        
+        if registerNewCrashes {
+            if state != .notOnTrack { return }
+            
+            onCrashUpdated.send(.newCrash)
+            registerNewCrashes = false
+            return
+        }
+        
+        // We need to dissolve the crash when there is already one registerd.
+        if state != .notOnTrack {
+            onCrashUpdated.send(.dissolved)
+        } else {
+            onCrashUpdated.send(.dissolvedCanceled)
         }
     }
 }
