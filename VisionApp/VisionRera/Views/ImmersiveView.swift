@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ARKit
+import Combine
 
 private enum AttachementsIDs {
     case speedHand
@@ -23,9 +24,13 @@ struct ImmersiveView: View {
     /// Store handtracking anchor updates to show immersive AR-Elements around the hands of the user.
     var speedBarometerEntityHandler = SpeedBarometerEntityHandler()
     
+    var raceInfoEntityHandler = RaceInfosEntityHandler()
+    @State private var onLapFinishedSubscription: AnyCancellable?
+    
     var body: some View {
         RealityView { content, attachments in
             speedBarometerEntityHandler.realityViewContent = content
+            raceInfoEntityHandler.realityViewContent = content
             
             // Attachements
             if let attachement = attachments.entity(for: AttachementsIDs.speedHand) {
@@ -116,6 +121,21 @@ struct ImmersiveView: View {
         // Enable barcode detection if track detection is active.
         .onChange(of: trackDetectionModel.isDetecting) {
             immersiveModel.enableBarcodeDetection = $1
+        }
+        .onChange(of: gameModel.mode) {
+            if $1 == nil {
+                onLapFinishedSubscription?.cancel()
+                raceInfoEntityHandler.removeAllRaceInfos()
+                return
+            }
+            
+            guard let trackInfo = trackDetectionModel.trackInfo else { return }
+            raceInfoEntityHandler.setRaceInfosTransform(transform: trackInfo.transform)
+            
+            onLapFinishedSubscription = gameModel.lapSessionFeature?.lapSessionFeature.onLapFinishedPublisher.sink { lapInfo in
+                // TODO: Only inform if fastestest Lap, not for every Lap
+                raceInfoEntityHandler.requestRaceInfo(.fastestLap(lapInfo.lap))
+            }
         }
     }
 }

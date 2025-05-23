@@ -11,12 +11,81 @@ import RealityKit
 /// Race infos are shown in the center on top of the track. Shows information like
 /// new fastest lap or an countdown when starting a race.
 @MainActor
-struct RaceInfosEntityHandler {
+class RaceInfosEntityHandler {
     
-    /// Conatiner to hold the info entitys.
-    let mainEntity = Entity()
+    var realityViewContent: RealityViewContent?
     
+    enum Info {
+        case empty
+        case fastestLap(Lap)
+    }
+    private(set) var currentInfo: Info = .empty
     
+    private var mainEntity: Entity?
+    private let fastestLapEntityHandler = FastestLapEntityHandler()
+    
+    /// Creates a new container entity for the race infos if non is aleady there and updates the transform of it.
+    /// The `realityViewContent` has to set before using this function, otherwise it will do nothing.
+    func setRaceInfosTransform(transform: Transform) {
+        guard let realityViewContent else { return }
+        
+        // Create a new main entity if there is no current one.
+        if mainEntity == nil {
+            mainEntity = Entity()
+            realityViewContent.add(mainEntity!)
+        }
+        
+        // The mainEntity should never be nil here, but for simpler
+        // and safer code we still use the guard statement.
+        guard let mainEntity else { return }
+        
+        mainEntity.position = transform.translation
+        
+        // Convert to Rotation3D to easier remove rotation around x and z axis.
+        var rotation = Rotation3D(transform.rotation)
+        rotation.axis.x = 0
+        rotation.axis.z = 0
+        mainEntity.transform.rotation = simd_quatf(rotation)
+    }
+    
+    /// Removes all race infos. You have to call `setRaceInfosTransform` before requesting race infos again.
+    func removeAllRaceInfos() {
+        mainEntity?.removeFromParent()
+        mainEntity = nil
+    }
+    
+    /// Requests to show the type of info. Based on the current info and state, the presentation
+    /// can happen immediately, be delayed or never shown.
+    func requestRaceInfo(_ requestInfo: Info) {
+        guard let mainEntity else { return }
+        
+        // For now we just return if there is already presented some race infos.
+        if case .fastestLap(_) = currentInfo {
+            return
+        }
+        
+        switch requestInfo {
+        case .fastestLap(let lap):
+            currentInfo = .fastestLap(lap)
+            
+            let fastestEntity = fastestLapEntityHandler.createFastestLapEntity(lap: lap)
+            let fastestLapWidth = fastestEntity.visualBounds(relativeTo: nil).extents.x
+            
+            fastestEntity.position = [ -(fastestLapWidth / 2), 0.2, 0 ]
+            mainEntity.addChild(fastestEntity)
+            
+            // After 1.5 seconds remove the entity and reset currentInfo
+            Task {
+                try await Task.sleep(for: .milliseconds(2500))
+                fastestEntity.removeFromParent()
+                currentInfo = .empty
+                
+                print("fastest lap entity removed")
+            }
+            
+        default: break
+        }
+    }
 }
 
 @MainActor
