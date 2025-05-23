@@ -45,6 +45,10 @@ class GameModel {
         gameModeHandler as? CrashDetectionProtocol
     }
     
+    var carAtStartlineFeature: CarAtStartlineProtocol? {
+        gameModeHandler as? CarAtStartlineProtocol
+    }
+    
     func onInputAvailabilityChanged(isAvailable: Bool) {
         if !isAvailable { mode = nil }
     }

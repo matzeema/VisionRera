@@ -70,6 +70,12 @@ struct VisionReraApp: App {
                     crashDetection.crashDetectionFeature.onCarOnTrackStateChanged(state: state)
                 }
             }
+            // Inform GameModel about car at startline changes.
+            .onChange(of: raceTrackModel.getCarStandsOnSensor()) {
+                if let carAtStartlineFeature = gameModel.carAtStartlineFeature {
+                    carAtStartlineFeature.carStandsAtStartline($1)
+                }
+            }
         }
         .immersionStyle(selection: .constant(.mixed), in: .mixed)
      }
