@@ -18,7 +18,7 @@ struct LaunchView: View {
             VStack {
                 Text("VisionRera")
                     .font(.extraLargeTitle2)
-                Text("Vision Pro x Carrera Experience")
+                Text("Immersive Slot-Car Experience")
                     .font(.headline)
                     .foregroundStyle(.secondary)
             }.padding()

@@ -35,7 +35,7 @@ struct TrackMenuView: View {
                 
             // No track detected view
             } else {
-                Text("No Track detected")
+                Text("No position defined")
                     .font(.largeTitle)
                 
                 Image(systemName: "barcode.viewfinder")
