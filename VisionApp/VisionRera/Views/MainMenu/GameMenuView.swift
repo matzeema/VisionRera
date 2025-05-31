@@ -80,5 +80,6 @@ private struct GameItemView: View {
     GameMenuView()
         .environment(RaceTrackModel())
         .environment(GameModel())
+        .environment(InputModel())
         
 }
