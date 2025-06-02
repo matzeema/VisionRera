@@ -133,6 +133,7 @@ private struct LapsRaceView: View {
                         .font(.system(size: 20))
                         .foregroundStyle(.secondary)
                 }
+                .padding(.bottom, 42.0)
                 
             case .racing:
                 let laps = lapsRace.lapSessionFeature.laps
@@ -201,12 +202,12 @@ private struct LapsRaceView: View {
     RaceContainerView(name: "Free Drive", exitGameAction: {}) {
         FreeDriveView(
             laps: [
-                Lap(id: 1, startMillis: 0, endMillis: 2000),
-                Lap(id: 2, startMillis: 2000, endMillis: 2357),
-                Lap(id: 3, startMillis: 2357, endMillis: 2942),
-                Lap(id: 4, startMillis: 2942, endMillis: 3447),
-                Lap(id: 5, startMillis: 3447, endMillis: 4001),
-                Lap(id: 6, startMillis: 3447)
+                Lap(id: 1, startMillis: 0, endMillis: 2140),
+                Lap(id: 2, startMillis: 2000, endMillis: 3789),
+                Lap(id: 3, startMillis: 3789, endMillis: 6254),
+                Lap(id: 4, startMillis: 6254, endMillis: 7800),
+                Lap(id: 5, startMillis: 7800, endMillis: 10526),
+                Lap(id: 6, startMillis: 10526)
             ]
         )
     }
@@ -214,6 +215,6 @@ private struct LapsRaceView: View {
 
 #Preview(windowStyle: .automatic, traits: .fixedLayout(width: 600, height: 400)) {
     RaceContainerView(name: "Laps Race", exitGameAction: {}) {
-        LapsRaceView(lapsRace: LapsRaceMode()) 
+        LapsRaceView(lapsRace: LapsRaceMode())
     }
 }
