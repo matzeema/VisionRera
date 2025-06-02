@@ -22,9 +22,9 @@ struct ImmersiveView: View {
     @Environment(GameModel.self) var gameModel
     
     /// Store handtracking anchor updates to show immersive AR-Elements around the hands of the user.
-    var speedBarometerEntityHandler = SpeedBarometerEntityHandler()
+    @State private var speedBarometerEntityHandler = SpeedBarometerEntityHandler()
     
-    var raceInfoEntityHandler = RaceInfosEntityHandler()
+    @State private var raceInfoEntityHandler = RaceInfosEntityHandler()
     @State private var onLapFinishedSubscription: AnyCancellable?
     
     var body: some View {
